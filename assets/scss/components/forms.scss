@@ -1,0 +1,111 @@
+.form-group {
+  label {
+    display: block;
+    font-weight: bold;
+  }
+}
+
+.form-error {
+  font-style: italic;
+}
+
+.button-add {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .shadow;
+  border-radius: 2rem;
+  font-size: 0;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  vertical-align: top;
+  margin-top: 0.75rem;
+  margin-left: 0.5rem;
+
+  .icon {
+    font-size: 0.8rem;
+    @extend .fas;
+    @extend .fa-plus;
+  }
+}
+
+.button-watch {
+  @extend .btn;
+  padding: 0;
+
+  font-size: 0;
+  margin-left: 0.25rem;
+  margin-bottom: 2px;
+
+  .icon {
+    font-size: 1rem;
+    @extend .far;
+    @extend .fa-star;
+  }
+
+  &.active .icon {
+    @extend .fas;
+    color: $yellow;
+  }
+}
+
+.button-save {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.button-delete {
+  @extend .btn;
+  @extend .btn-danger;
+}
+
+.button-close {
+  font-size: 0;
+  @extend .fas;
+  @extend .fa-times;
+
+  &::before {
+    font-size: 1rem;
+  }
+  color: $black;
+  float: right;
+}
+
+button + button {
+  margin-left: 0.5rem;
+}
+
+select.form-control {
+  width: auto;
+}
+
+.form-box {
+  border: 5px solid $gray-800;
+  border-radius: 10px;
+  padding: 7px 15px;
+}
+
+/* Page Animations */
+.form-page-animation {
+
+  // width: 100vw;
+
+  .form-pages {
+    // @extend .row;
+  }
+
+  // .form-group {
+  //   @extend .col-md-6;
+  //   display: none;
+  // }
+
+  // .form-group.active {
+  //   display: block;
+  // }
+
+}
+
+.signup-form {
+  label {
+    font-weight: bold;
+  }
+}

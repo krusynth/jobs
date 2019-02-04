@@ -1,0 +1,210 @@
+.job {
+  margin-bottom: 1rem;
+
+  .upcoming-notice {
+    @extend .badge;
+    @extend .badge-warning;
+
+    float: right;
+    margin-right: 15px;
+  }
+}
+
+.job-title {
+  font-weight: bold;
+
+  .job-details & {
+    font-size: 1.5rem;
+  }
+}
+
+/* Job Form */
+
+.job-form {
+  .field-group {
+    @extend .col-md-6;
+  }
+
+  .job-name {
+    @extend .col-md-11;
+    input {
+      padding: 0 0.5rem;
+      font-size: 2.0rem;
+      font-weight: bold;
+    }
+  }
+
+  .button-group {
+    margin-bottom: 0.5rem;
+  }
+
+  .toggle-watch-button {
+    @extend .btn;
+    @extend .shadow;
+
+    .icon {
+      @extend .far;
+      @extend .fa-star;
+      margin-right: 0.25rem;
+    }
+
+    &.inactive {
+      @extend .btn-light;
+      border: 1px solid $gray-600;
+    }
+
+    &.active {
+      @extend .btn-primary;
+
+      .icon {
+        @extend .fas;
+      }
+    }
+  }
+
+  .delete-button {
+    @extend .btn;
+    @extend .btn-danger;
+    @extend .shadow;
+    float: right;
+
+    .icon {
+      @extend .fas;
+      @extend .fa-trash-alt;
+      margin-right: 0.25rem;
+    }
+  }
+
+  .save-status {
+    @extend.col-md-1;
+    @extend .order-2;
+  }
+
+  .job-description {
+    // Our textarea for the description should be very large!
+    textarea {
+      height: 20rem;
+    }
+  }
+
+  .toggle-watch-button {
+
+  }
+}
+
+/* Events */
+
+$timelineHeight: 2.5rem;
+
+.event-add-button {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-sm;
+  @extend .shadow;
+
+  height: 2rem;
+  border-radius: 2rem;
+  margin-top: 0.25rem;
+  float: left;
+  margin-right: 0.25rem;
+}
+
+.event-add {
+  font-size: 0;
+  @extend .fas;
+  @extend .fa-map-marker-plus;
+
+  margin-top: 0.1rem;
+  &::before {
+    font-size: 1.2rem;
+  }
+
+  .event-add-button &:hover::before {
+    @extend .bounce;
+  }
+}
+
+.event-remove-button {
+  @extend .btn;
+  @extend .btn-danger;
+
+  padding: 0 0.35rem;
+  border-radius: 2rem;
+}
+
+.event-remove {
+  font-size: 0;
+  @extend .fas;
+  @extend .fa-minus;
+
+  &::before {
+    font-size: 1rem;
+  }
+}
+
+.job-events {
+  @extend .progress;
+  height: $timelineHeight;
+  width: calc(100% - 3rem);
+}
+
+.events-placeholder {
+  font-style: oblique;
+  color: $gray-700;
+  font-size: 0.9rem;
+  line-height: $timelineHeight;
+
+  .icon {
+    @extend .fas;
+    @extend .fa-arrow-left;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
+  }
+}
+
+.job-event {
+  @extend .progress-bar;
+  border-right: 2px solid $white;
+
+  width: 10%;
+  min-width: 7rem;
+
+  &:last-child {
+    border-right: none;
+  }
+
+  .type {
+    font-weight: bold;
+  }
+
+  &.selected {
+    border: 1px solid $white;
+  }
+}
+
+.event-interview {
+  @extend .bg-info;
+}
+
+.event-applied {
+  @extend .bg-success;
+}
+
+.event-interview {
+  color: $white;
+  text-decoration: none;
+  // .icon {
+  //  display: block;
+  //  font-size: 1.3rem;
+  //  @extend .fas;
+  //  @extend .fa-comment;
+  // }
+}
+
+.event-form {
+  @extend .form-box;
+}
+
+.job-actions {
+  margin: 0.5rem 0;
+}

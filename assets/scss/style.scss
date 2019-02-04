@@ -1,0 +1,20 @@
+$fa-font-path: "/fonts/fontawesome";
+@import 'fontawesome/fontawesome';
+@import 'fontawesome/light';
+@import 'fontawesome/regular';
+@import 'fontawesome/solid';
+
+@import 'bootstrap/bootstrap';
+@import '~react-datepicker/dist/react-datepicker.css';
+
+@import './components/modules';
+@import './components/home';
+@import './components/forms';
+@import './components/profile-form';
+@import './components/jobs';
+
+h1 {
+	display: inline-block;
+}
+
+

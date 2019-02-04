@@ -1,0 +1,174 @@
+/* Animations */
+
+.bounce {
+  display: inline-block;
+  position: relative;
+  top: 0;
+  -moz-animation: bounce 0.5s infinite linear;
+  -o-animation: bounce 0.5s infinite linear;
+  -webkit-animation: bounce 0.5s infinite linear;
+  animation: bounce 0.5s infinite linear;
+}
+@-webkit-keyframes bounce {
+  0% { top: 0; }
+  50% { top: -0.2em; }
+  70% { top: -0.3em; }
+  100% { top: 0; }
+}
+@-moz-keyframes bounce {
+  0% { top: 0; }
+  50% { top: -0.2em; }
+  70% { top: -0.3em; }
+  100% { top: 0; }
+}
+@-o-keyframes bounce {
+  0% { top: 0; }
+  50% { top: -0.2em; }
+  70% { top: -0.3em; }
+  100% { top: 0; }
+}
+@-ms-keyframes bounce {
+  0% { top: 0; }
+  50% { top: -0.2em; }
+  70% { top: -0.3em; }
+  100% { top: 0; }
+}
+@keyframes bounce {
+  0% { top: 0; }
+  50% { top: -0.2em; }
+  70% { top: -0.3em; }
+  100% { top: 0; }
+
+}
+
+/* Buttons */
+
+.shadow {
+  box-shadow: 0 3px 3px rgba(0,0,0,0.36);
+}
+
+.button-round {
+  @extend .btn;
+
+  border-radius: 3rem;
+  width: 2.35rem;
+  padding-left: 0.65rem;
+  padding-right: 0.65rem;
+}
+
+
+.button-round-sm {
+  @extend .btn;
+  @extend .btn-sm;
+
+  border-radius: 3rem;
+  width: 1.95rem;
+  // padding-left: 0.65rem;
+  // padding-right: 0.65rem;
+}
+
+.button-group {
+  .btn, .button {
+    margin-right: .5em;
+  }
+  .btn:last-child, .button:last-child {
+    margin-right: 0;
+  }
+}
+
+.under-construction {
+
+  .message {
+    font-size: 0.9rem;
+    color: $gray-700;
+  }
+
+  .under-construction-header .icon {
+    @extend .fas;
+    @extend .fa-exclamation-triangle;
+    margin-right: 0.25rem;
+  }
+
+  &.contained {
+    border: 2px solid $gray-300;
+    padding: 0 15px;
+    margin: 0 -20px;
+    border-radius: 4px;
+
+    .under-construction-header {
+      position: relative;
+      top: -1rem;
+      text-align: center;
+    }
+
+    .message {
+      display: inline-block;
+      background-color: $white;
+      padding: 0 3px;
+    }
+  }
+}
+
+
+/* Autosave */
+// For autosave status. Re-used from:
+// https://github.com/krues8dr/madison-editor/blob/master/assets/scss/modules/_forms.scss
+
+%inside-icon {
+  @extend .fas;
+  @extend .fa-stack-1x;
+  @extend .fa-inverse;
+
+  margin-top: 2px;
+  font-size: 1.2rem;
+}
+
+.save-status {
+  line-height: 1;
+  text-align:center;
+
+  .icon {
+    @extend .fa-stack;
+  }
+
+  .bg {
+    @extend .fas;
+    @extend .fa-cloud;
+    @extend .fa-stack-2x;
+    // font-size: 1.5rem;
+  }
+
+  .message {
+    font-size: 0.8rem;
+  }
+
+  .saved {
+    @extend %inside-icon;
+    @extend .fa-check;
+  }
+
+  .saving {
+    @extend %inside-icon;
+    @extend .fa-arrow-up;
+    margin-top: 3px;
+
+    &:before {
+      @extend .bounce;
+    }
+  }
+
+  .unsaved {
+    @extend %inside-icon;
+    @extend .fa-exclamation;
+  }
+
+  .syncing {
+    @extend %inside-icon;
+    @extend .fa-arrow-down;
+    margin-top: 3px;
+
+    &:before {
+      @extend .bounce;
+    }
+  }
+}

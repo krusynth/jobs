@@ -1,0 +1,108 @@
+
+.page-header {
+  @extend .col-md-12;
+}
+
+.status-wrapper {
+  @extend .col-md-12;
+}
+
+.jobs-wrapper {
+  @extend .col-md-9;
+}
+
+.activity-wrapper {
+  @extend .col-md-3;
+}
+
+/* Status */
+
+.status-wrapper {
+  background-color: lighten($yellow, 20%);
+  border: 5px solid $gray-600;
+  border-radius: 10px;
+  padding: 7px 15px;
+  margin-bottom: 2rem;
+}
+
+.status-buttons {
+  display: inline-block;
+  margin-left: 1rem;
+
+  .button {
+    @extend .button-round;
+    @extend .btn-primary;
+    @extend .shadow;
+    font-size: 1.75rem;
+    line-height: 1.35;
+    padding: 0rem;
+    width: 2.5rem;
+    margin-right: 0.25rem;
+  }
+
+  .button-happy {
+    @extend .btn-success;
+  }
+
+  .button-down {
+    @extend .btn-danger;
+  }
+}
+
+
+/* Activity */
+.activity {
+  @extend .row;
+
+  .title {
+    flex: 0 0 100%;
+  }
+
+  .card-wrapper {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0.25rem 0.25rem;
+  }
+
+  .card {
+  }
+
+  .card-body {
+    padding: 0.5rem;
+    display: grid;
+    height: 7rem;
+  }
+
+  .card-header {
+    text-align: center;
+    font-size: 3rem;
+    height: 5rem;
+
+    .icon {
+      color: $blue;
+      position: relative;
+      top: -0.25rem;
+    }
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+    align-self: center;
+  }
+
+  .card-buttons {
+    text-align: center;
+    align-self: end;
+  }
+
+  .button {
+    @extend .button-round-sm;
+    @extend .shadow;
+  }
+
+  .button + .button {
+    margin-left: 0.25rem;
+  }
+
+}
