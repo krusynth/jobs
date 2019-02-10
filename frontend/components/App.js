@@ -68,30 +68,30 @@ class App extends AsyncComponent {
               />
 
               <PublicRoute path="/login/" component={Login}
-                authed={this.state.user.userLeveId}
+                authed={this.state.user.userLevelId}
                 redirectTo="/"
                 refresh={this.refresh}
               />
 
               <PublicRoute path="/signup/" component={Signup}
-                authed={this.state.user.userLeveId}
+                authed={this.state.user.userLevelId}
                 redirectTo="/"
                 refresh={this.refresh}
               />
 
               <PrivateRoute path="/logout/" component={Logout}
-                authed={this.state.user.userLeveId}
+                authed={this.state.user.userLevelId}
                 redirectTo="/"
                 refresh={this.refresh}
               />
 
               <PrivateRoute path="/job/:id" component={Job}
-                authed={this.state.user.userLeveId}
+                authed={this.state.user.userLevelId}
                 redirectTo="/login/"
               />
 
               <PrivateRoute path="/admin/" component={Admin}
-                authed={this.state.user.userLeveId >= 2}
+                authed={this.state.user.userLevelId >= 2}
                 redirectTo="/login/"
               />
 
