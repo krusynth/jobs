@@ -1,12 +1,26 @@
-.form-group {
+.field-group {
+  @extend .col-md-6;
+  margin-bottom: 1rem;
+
   label {
     display: block;
     font-weight: bold;
+
+    .plain-text {
+      font-weight: normal;
+    }
   }
 }
 
+
 .form-error {
   font-style: italic;
+}
+
+.button {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .shadow;
 }
 
 .button-add {
@@ -35,6 +49,7 @@
   font-size: 0;
   margin-left: 0.25rem;
   margin-bottom: 2px;
+  background: transparent;
 
   .icon {
     font-size: 1rem;

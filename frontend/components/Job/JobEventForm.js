@@ -29,30 +29,58 @@ export default class JobEventForm extends Component {
 
         <h2>{this.state.id ? 'Update Milestone' : 'Add Milestone' }</h2>
 
-        <div className="form-group">
-          <label htmlFor="type">Type</label>
-          <select
-            name="type"
-            id="type"
-            className="form-control"
-            value={this.state.type}
-            onChange={this.handleChange}
-          >
-            <option value="Applied">Applied</option>
-            <option value="Response">Received Response</option>
-            <option value="Interview">Interview</option>
-          </select>
-        </div>
+        <div className="row">
+          <div className="event-details">
+            <div className="form-group">
+              <label htmlFor="type">Type</label>
+              <select
+                name="type"
+                id="type"
+                className="form-control"
+                value={this.state.type}
+                onChange={this.handleChange}
+              >
+                <option value="Applied">Applied</option>
+                <option value="Response">Received Response</option>
+                <option value="Interview">Interview</option>
+              </select>
+            </div>
 
-        <div className="form-group">
-          <label htmlFor="date">Date</label>
-          <DatePick
-            name="date"
-            value={this.state.date}
-            onChange={this.handleChange}
-          />
-        </div>
+            <div className="form-group">
+              <label htmlFor="date">Date</label>
+              <DatePick
+                name="date"
+                value={this.state.date}
+                onChange={this.handleChange}
+              />
+            </div>
 
+            {this.state.type == 'Interview' &&
+            <div className="form-group">
+              <label htmlFor="duration">Length of Interview</label>
+              <p>(in minutes)</p>
+              <input
+                name="duration"
+                id="duration"
+                type="number"
+                value={this.state.duration}
+                onChange={this.handleChange}
+              />
+            </div>}
+          </div>
+
+          <div className="event-notes">
+            <div className="form-group">
+              <label htmlFor="notes">My Notes</label>
+              <textarea
+                name="notes"
+                className="form-control"
+                value={this.state.notes}
+                onChange={this.handleChange}
+              />
+            </div>
+          </div>
+        </div>
         <div className="form-group">
           <button
             type="button"

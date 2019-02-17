@@ -20,22 +20,43 @@
 
 /* Job Form */
 
+.job-create-form {
+  @extend .row;
+  margin-bottom: 1rem;
+}
+
+
 .job-form {
   .field-group {
     @extend .col-md-6;
   }
 
   .job-name {
-    @extend .col-md-11;
+    @extend .col-md-6;
+  }
+  .company-name {
+    @extend .col-md-5;
+
+    .plain-text {
+      line-height: 3rem;
+      position: absolute;
+    }
+
     input {
-      padding: 0 0.5rem;
-      font-size: 2.0rem;
-      font-weight: bold;
+      margin-left: 2rem;
     }
   }
 
   .button-group {
     margin-bottom: 0.5rem;
+  }
+
+  .job-name, .company-name {
+    input {
+      padding: 0 0.5rem;
+      font-size: 2.0rem;
+      font-weight: bold;
+    }
   }
 
   .toggle-watch-button {
@@ -207,4 +228,16 @@ $timelineHeight: 2.5rem;
 
 .job-actions {
   margin: 0.5rem 0;
+}
+
+.event-details {
+  @extend .col-md-4;
+}
+
+.event-notes {
+  @extend .col-md-8;
+
+  textarea {
+    height: 12rem;
+  }
 }

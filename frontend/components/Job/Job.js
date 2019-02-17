@@ -25,6 +25,10 @@ const jobSchema = Yup.object().shape({
     .max(100, 'Whoa, that\'s a long name. Is there a shorter name?')
     .required('Please fill out the job position name.'),
 
+  company: Yup.string()
+    .max(100, 'Whoa, that\'s a long company name. Is there a shorter company name?')
+    .required('Please fill out the company name.'),
+
   description: Yup.string()
     .max(2048, 'The description is a bit too long, please use a shorter description (2048 characters or less).')
     .nullable(),
@@ -176,14 +180,22 @@ export default class Job extends AsyncComponent {
             handleSubmit,
             isSubmitting,
            }) => (
-            <Form className="job-form">
+            <Form className="job-form job-edit-form">
               <header className="row">
                 <SaveStatus status={this.state.status}/>
 
-                <div className="form-group job-name">
-                  <Field type="text" name="name" id="name" className="form-control" />
-                  <ErrorMessage className="form-error" name="name" component="div" />
-                </div>
+                  <div className="form-group job-name">
+                    <Field type="text" name="name" id="name"
+                      placeholder="Position Name" className="form-control" />
+                    <ErrorMessage className="form-error" name="name" component="div" />
+                  </div>
+
+                  <div className="form-group company-name">
+                    <span className="plain-text">at</span>
+                    <Field type="text" name="company" id="company"
+                      placeholder="Company" className="form-control" />
+                    <ErrorMessage className="form-error" name="company" component="div" />
+                  </div>
               </header>
               <header className="button-group">
                 { this.watchButton() }

@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     type: DataTypes.STRING,
     duration: DataTypes.INTEGER,
-    contacts: DataTypes.TEXT,
+    notes: DataTypes.TEXT,
     jobId: DataTypes.INTEGER
   }, {
     tableName: 'job_events',

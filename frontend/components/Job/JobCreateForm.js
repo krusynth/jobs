@@ -5,7 +5,8 @@ export default class JobCreateForm extends Component {
     super(props);
 
     this.initialState = {
-      name: ''
+      name: '',
+      company: ''
     };
 
     this.state = this.initialState;
@@ -27,18 +28,34 @@ export default class JobCreateForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.submitForm}>
-        <label>Name</label>
-        <input
-          type="text"
-          name="name"
-          value={this.state.name}
-          onChange={this.handleChange} />
+      <form onSubmit={this.submitForm} className="job-form job-create-form">
+        <div className="field-group">
+          <label>Position</label>
+          <input
+            type="text"
+            name="name"
+            className="form-control"
+            value={this.state.name}
+            onChange={this.handleChange} />
+        </div>
 
-        <input
-          type="button"
-          value="Submit"
-          onClick={this.submitForm} />
+        <div className="field-group">
+          <label><span className="plain-text">at</span> Company</label>
+          <input
+            type="text"
+            name="name"
+            className="form-control"
+            value={this.state.name}
+            onChange={this.handleChange} />
+        </div>
+
+        <div className="field-group">
+          <input
+            type="button"
+            value="Submit"
+            className="button"
+            onClick={this.submitForm} />
+        </div>
       </form>
       );
   }

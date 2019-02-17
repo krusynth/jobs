@@ -30,7 +30,8 @@ export default class JobRow extends Job {
 
     return (
       <header>
-        <Link to={"/job/"+this.state.job.id}><span className="job-title">{this.state.job.name}</span></Link>
+        <Link to={"/job/"+this.state.job.id}><span className="job-title"
+          >{this.state.job.name} at {this.state.job.company}</span></Link>
         <button
           className={"button-watch "+(this.state.job.watching ? "active": "")}
           onClick={ this.toggleWatching }
