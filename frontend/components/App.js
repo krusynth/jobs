@@ -5,6 +5,7 @@ import { PropsRoute, PublicRoute, PrivateRoute } from 'react-router-with-props';
 import AsyncComponent from 'lib/AsyncComponent';
 
 import Header from 'components/modules/Header';
+import Footer from 'components/modules/Footer';
 
 import Home   from 'components/Home/Home';
 import Admin  from 'components/Admin/Admin';
@@ -97,6 +98,7 @@ class App extends AsyncComponent {
               />
 
             </main>
+            <Footer />
           </div>
         </Router>}
         {this.state.loading && <section>Loading...</section>}
