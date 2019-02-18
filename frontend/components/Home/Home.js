@@ -33,7 +33,7 @@ export default class Home extends Component {
   render() {
     if(this.props.user && this.props.user.userLevelId) {
       return (
-        <UserHome user={this.props.user} />
+        <UserHome {...this.props} />
       );
     }
     else {

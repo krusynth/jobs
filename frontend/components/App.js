@@ -62,9 +62,10 @@ class App extends AsyncComponent {
             <Header
               userLevel={this.state.userLevel}
             />
-            <main role="main" className="container">
+            <main role="main" className="container main">
               <PropsRoute exact path="/" component={Home}
                 user={this.state.user}
+                refresh={this.refresh}
               />
 
               <PublicRoute path="/login/" component={Login}

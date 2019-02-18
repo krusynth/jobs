@@ -12,13 +12,13 @@ export default class UserHome extends Component {
           <h1>JobsCRM</h1>
         </header>
         <div className="status-wrapper">
-          <Status user={this.props.user} />
+          <Status {...this.props} />
         </div>
         <div className="jobs-wrapper">
-          <Jobs user={this.props.user} />
+          <Jobs {...this.props} />
         </div>
         <div className="activity-wrapper">
-          <Activity user={this.props.user} />
+          <Activity {...this.props} />
         </div>
       </section>
     );

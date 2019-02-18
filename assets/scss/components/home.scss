@@ -1,3 +1,6 @@
+.main {
+  margin-bottom: 2rem;
+}
 
 .page-header {
   @extend .col-md-12;
@@ -68,9 +71,9 @@
   }
 
   .card-body {
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem 0.5rem;
     display: grid;
-    height: 7rem;
+    height: 8rem;
   }
 
   .card-header {
@@ -88,7 +91,6 @@
   .card-text {
     font-size: 0.8rem;
     margin-bottom: 0.5rem;
-    align-self: center;
   }
 
   .card-buttons {
@@ -105,4 +107,34 @@
     margin-left: 0.25rem;
   }
 
+  .card-inactive {
+    .card-header {
+      background-color: $gray-500;
+
+      .icon {
+        color: $gray-700;
+      }
+    }
+
+    .card-body {
+      background-color: $gray-400;
+    }
+
+    .card-buttons {
+      display: none;
+    }
+
+    .result {
+      margin: 0;
+      text-align: center;
+      align-self: end;
+
+      span {
+        background-color: $blue;
+        color: $white;
+        padding: 0.25rem 1rem;
+        border-radius: 5px;
+      }
+    }
+  }
 }
