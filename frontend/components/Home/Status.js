@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
-import UnderConstruction, {wip} from 'components/modules/UnderConstruction';
+
+import UserMoodModel from 'models/UserMoodModel';
 
 export default class Status extends Component {
+  userMoodModel = new UserMoodModel();
+
   updateStatus = (status) => {
-    wip();
+    this.userMoodModel.create({
+      'mood': status
+    });
   }
 
   render() {
     return (
       <section className="status">
-        <UnderConstruction/>
         <span className="message">How are you doing today?</span>
         <div className="status-buttons">
           <a href="#" className="button button-happy"
