@@ -52,13 +52,13 @@ export default class Login extends Component {
         <form
           onSubmit={this.handleSubmit}
         >
-          <div className="form-group errors">
+          <div className="field-group errors">
             <ul>
               { this.state.errors.map( (error, i) => <li key={i}>{error}</li>) }
             </ul>
           </div>
 
-          <div className="form-group">
+          <div className="field-group">
             <label htmlFor="email">Email</label>
             <input
               name="email"
@@ -70,7 +70,7 @@ export default class Login extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div className="field-group">
             <label htmlFor="password">Password</label>
             <input
               name="password"
@@ -82,7 +82,7 @@ export default class Login extends Component {
             />
           </div>
 
-          <div className="form-group">
+          <div className="field-group">
             <input
               type="submit"
               value="Login"
