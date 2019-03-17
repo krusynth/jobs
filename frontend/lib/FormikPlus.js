@@ -1,4 +1,4 @@
-import React from 'React';
+import React from 'react';
 import { Formik, isString, isFunction, warnAboutMissingIdentifier, setIn } from 'formik';
 
 export default class FormikPlus extends Formik {
