@@ -6,6 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js --exec babel-node --host 0.0.0.0",
+    "build": "./node_modules/.bin/webpack",
+    "watch": "./node_modules/.bin/webpack --watch",
     "sequelize": "node node_modules/.bin/sequelize"
   },
   "author": "Krues8dr",
