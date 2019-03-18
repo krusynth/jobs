@@ -24,6 +24,10 @@ class UserController extends Controller {
     // Auth required to do everything else.
     router.get('/', this.app.authMiddleware, this.read.bind(this));
     router.put('/', this.app.authMiddleware, this.updateMany.bind(this));
+
+    router.get('/current', this.app.authMiddleware, this.readCurrent.bind(this));
+    router.put('/current', this.app.authMiddleware, this.updateCurrent.bind(this));
+
     router.get('/:id', this.app.authMiddleware, this.readById.bind(this));
     router.put('/:id', this.app.authMiddleware, this.update.bind(this));
 
@@ -49,21 +53,20 @@ class UserController extends Controller {
     return Promise.resolve([req, res]);
   }
 
-  readById(req, res, next) {
-    let id = req.params.id;
-    if(req.params.id === 'current') {
-      // Check session, set id to user id from session.
-      try {
-        id = req.session.passport.user.id;
-      }
-      catch(error) {
-        res.status(401).send();
-        return;
-      }
+  readCurrent(req, res, next) {
+    let query = {'where': {}};
+
+    try {
+      query.where.id = req.session.passport.user.id;
     }
-    this.model.findOne({'where': {'id' : id}})
+    catch(error) {
+      res.status(401).send();
+      return;
+    }
+
+    this.model.findOne(query)
     .then( data => this._instance = data)
-    .then(this._readById)
+    .then( this._handleActions )
     .then( data => {
       res.send(data);
     })
@@ -72,13 +75,13 @@ class UserController extends Controller {
     });
   }
 
-  _readById = (data) => {
+  _handleActions = (data) => {
     // If we don't have recent actions...
     if(
       typeof data.meta == 'undefined' ||
       data.meta == null ||
       typeof data.meta.actionDate == 'undefined' ||
-      data.meta.actionDate < moment().subtract(6,'d').toDate()
+      moment(data.meta.actionDate).toDate() < moment().subtract(6,'d').toDate()
     ) {
 
       // Get four actions.
@@ -105,6 +108,18 @@ class UserController extends Controller {
     }
 
     return data;
+  }
+
+  updateCurrent(req, res, next) {
+    try {
+      req.params.id = req.session.passport.user.id;
+    }
+    catch(error) {
+      res.status(401).send();
+      return;
+    }
+
+    return this.update(req, res, next);
   }
 }
 
