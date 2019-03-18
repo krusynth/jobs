@@ -1,0 +1,36 @@
+.main-header {
+  background-color: $blue;
+  color: $white;
+  margin-bottom: 1rem;
+
+  @extend .shadow;
+
+  a {
+    padding: 0 !important;
+    margin: 0 0.5rem;
+    color: $white;
+    border-bottom: 2px solid rgba($white,0);
+    transition: border 0.25s;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: 2px solid rgba($white,1);
+    }
+  }
+}
+
+.navbar {
+  @extend .container;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.navbar-brand {
+  margin: 0 1rem 0 0;
+  padding: 0;
+  font-size: 1.5rem;
+}
+
+.page-header {
+  @extend .col-md-12;
+}

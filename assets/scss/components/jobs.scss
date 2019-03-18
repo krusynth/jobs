@@ -18,6 +18,13 @@
   }
 }
 
+.jobs-button-add {
+  font-size: 0.85rem;
+  .icon {
+    margin-right: 0.25rem;
+  }
+}
+
 /* Job Form */
 
 .job-create-form {
@@ -163,8 +170,15 @@ $timelineHeight: 2.5rem;
   }
 }
 
+.job-timeline {
+  background-color: $gray-200;
+  border-radius: 0.25rem;
+  padding-left: 0.35rem;
+}
+
 .job-events {
   @extend .progress;
+  background: none;
   height: $timelineHeight;
   width: calc(100% - 3rem);
 }
@@ -185,7 +199,7 @@ $timelineHeight: 2.5rem;
 
 .job-event {
   @extend .progress-bar;
-  border-right: 2px solid $white;
+  border-right: 2px solid $gray-200;
 
   width: 10%;
   min-width: 7rem;

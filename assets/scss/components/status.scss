@@ -1,0 +1,31 @@
+.status-wrapper {
+  background-color: lighten($yellow, 20%);
+  border: 5px solid $gray-600;
+  border-radius: 10px;
+  padding: 7px 15px;
+  margin-bottom: 2rem;
+}
+
+.status-buttons {
+  display: inline-block;
+  margin-left: 1rem;
+
+  .button {
+    @extend .button-round;
+    @extend .btn-primary;
+    @extend .shadow;
+    font-size: 1.75rem;
+    line-height: 1.35;
+    padding: 0rem;
+    width: 2.5rem;
+    margin-right: 0.25rem;
+  }
+
+  .button-happy {
+    @extend .btn-success;
+  }
+
+  .button-down {
+    @extend .btn-danger;
+  }
+}

@@ -24,9 +24,7 @@
 }
 
 .button-add {
-  @extend .btn;
-  @extend .btn-primary;
-  @extend .shadow;
+  @extend .button;
   border-radius: 2rem;
   font-size: 0;
   padding-left: 0.4rem;

@@ -68,16 +68,17 @@ export default class Jobs extends Component {
     }
 
     return (
-      <section>
+      <section className="jobs">
         { this.state.redirect && <Redirect to={this.state.redirect} /> }
         <header>
           <h1>Jobs</h1>
-          <button className="button-add" onClick={this.toggleForm}>
-            <span className="icon"></span>Add Job
+          <button className="button-add jobs-button-add" onClick={this.toggleForm}>
+            <span className="icon"></span>
+            New Job
           </button>
           {this.state.showAddForm && <JobCreateForm createJob={this.createJob} />}
         </header>
-        <section className="jobs">{result}</section>
+        <section className="jobs-list">{result}</section>
       </section>
     );
   }

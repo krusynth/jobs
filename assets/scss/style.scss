@@ -9,12 +9,9 @@ $fa-font-path: "/fonts/fontawesome";
 
 @import './components/modules';
 @import './components/home';
+@import './components/header';
 @import './components/forms';
 @import './components/profile-form';
 @import './components/jobs';
-
-h1 {
-	display: inline-block;
-}
-
-
+@import './components/status';
+@import './components/activity';

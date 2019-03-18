@@ -1,0 +1,85 @@
+.activity {
+  @extend .row;
+
+  .title {
+    flex: 0 0 100%;
+  }
+
+  .card-wrapper {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0.25rem 0.25rem;
+  }
+
+  .card {
+  }
+
+  .card-body {
+    padding: 0.25rem 0.5rem 0.5rem;
+    display: grid;
+    height: 8rem;
+  }
+
+  .card-header {
+    text-align: center;
+    font-size: 3rem;
+    height: 5rem;
+    padding-top: 0.5rem;
+
+    .icon {
+      color: $blue;
+      position: relative;
+      top: -0.25rem;
+    }
+  }
+
+  .card-text {
+    font-size: 0.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-buttons {
+    text-align: center;
+    align-self: end;
+  }
+
+  .button {
+    @extend .button-round-sm;
+    @extend .shadow;
+  }
+
+  .button + .button {
+    margin-left: 0.25rem;
+  }
+
+  .card-inactive {
+    .card-header {
+      background-color: $gray-500;
+
+      .icon {
+        color: $gray-700;
+      }
+    }
+
+    .card-body {
+      background-color: $gray-400;
+    }
+
+    .card-buttons {
+      display: none;
+    }
+
+    .result {
+      margin: 0;
+      text-align: center;
+      align-self: end;
+
+      span {
+        background-color: $blue;
+        color: $white;
+        padding: 0.25rem 1rem;
+        border-radius: 5px;
+      }
+    }
+  }
+}
