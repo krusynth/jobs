@@ -45,9 +45,7 @@ class App extends AsyncComponent {
       return this.setUser(data);
     })
     .catch( error => {
-      if(error.response.status === 401) {
-        return this.setUser({});
-      }
+      return this.setUser({});
     });
   }
 
