@@ -217,8 +217,6 @@ class Controller {
   }
 
   parseErrors(error) {
-    console.log('parseErrors', error.constructor.name);
-
     if(typeof error.errors === 'undefined' &&
       typeof error.message !== 'undefined') {
       return error.message;
@@ -236,7 +234,7 @@ class Controller {
   }
 
   buildWhere(reqQuery) {
-    let query = {};
+    let query = reqQuery || {};
 
     if(reqQuery.offset) {
       query.offset = parseInt(reqQuery.offset);
@@ -259,8 +257,12 @@ class Controller {
             break;
         }
       }
-      else {
+      else if(typeof reqQuery.order == 'string') {
+        console.log('order', reqQuery.order);
         query.order = [reqQuery.order.split(' ')];
+      }
+      else {
+        query.order = reqQuery.order;
       }
     }
 

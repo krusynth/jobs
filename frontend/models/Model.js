@@ -1,4 +1,5 @@
 import { config } from '../config';
+import ModelError from 'lib/ModelError';
 
 export default class Model {
 
@@ -17,7 +18,7 @@ export default class Model {
     })
     .then( ([res, data]) => {
       if(res !== 200) {
-        throw new HTTPError({status: res, message: data});
+        throw new ModelError(status, data);
       }
 
       return data;

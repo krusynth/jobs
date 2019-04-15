@@ -3,6 +3,7 @@ import AsyncComponent from 'lib/AsyncComponent';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
+import { FieldPlus } from 'lib/FormikPlus';
 
 import UserModel from 'models/UserModel';
 
@@ -23,7 +24,7 @@ const signupSchema = Yup.object().shape({
     .min(6, 'Please choose a longer password.')
     .max(254, 'Whoa, that password is too long for us. Can you please choose one shorter than 254 characters?')
     .required('Please create a password.'),
-  passwordConfirm: Yup.string()
+  confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], "Your passwords don't match. Please try again?")
     .required('Please confirm your password.'),
 });
@@ -37,7 +38,7 @@ export default class Signup extends AsyncComponent {
       lastName: '',
       email: '',
       password: '',
-      passwordConfirm: ''
+      confirmPassword: ''
     },
     saving: false,
     success: false
@@ -51,11 +52,9 @@ export default class Signup extends AsyncComponent {
         success: true
       });
     })
-    .catch( (err) => {
+    .catch( (err, other) => {
       actions.setSubmitting(false);
-      actions.setErrors(this.translateErrors(err.response.message));
-
-      // for(err.response.message
+      actions.setErrors(this.translateErrors(err.errors));
     });
   }
 
@@ -89,49 +88,25 @@ export default class Signup extends AsyncComponent {
             validationSchema={signupSchema}
             onSubmit={this.handleSubmit}
           >
-            {({
-              values,
-              errors,
-              dirty,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-              isSubmitting,
-             }) => (
+            {(formik) => (
               <Form>
+                <FieldPlus name="First Name" formik={formik}
+                  instructions="To start, please tell us what to call you." />
+
+                <FieldPlus name="Last Name" formik={formik}
+                  instructions="Now please tell us your last name or family name." />
+
+                <FieldPlus name="Email" type="email" formik={formik}
+                  instructions="We'll need your email address as well. Don't worry, we won't give it out to anyone else." />
+
+                <FieldPlus name="Password" type="password" formik={formik}
+                  instructions="Please pick a good password - preferably one you haven't used somewhere else." />
+
+                <FieldPlus name="Confirm Password" type="password" formik={formik}
+                  instructions="Please type the password one more time to make sure we've both got it correct." />
+
                 <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <p>To start, please tell us what to call you.</p>
-                  <Field type="text" name="firstName" id="firstName" />
-                  <ErrorMessage className="form-error" name="firstName" component="div" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last or Family Name</label>
-                  <p>Now please tell us your last name or family name.</p>
-                  <Field type="text" name="lastName" id="lastName" />
-                  <ErrorMessage className="form-error" name="lastName" component="div" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <p>We'll need your email address as well. Don't worry, we won't
-                    give it out to anyone else.</p>
-                  <Field type="email" name="email" id="email" />
-                  <ErrorMessage className="form-error" name="email" component="div" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="password">Password</label>
-                  <p>Please pick a good password - preferably one you haven't used
-                    somewhere else.</p>
-                  <Field type="password" name="password" id="password" />
-                  <ErrorMessage className="form-error" name="password" component="div" />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="passwordConfirm">Confirm Password</label>
-                  <p>Please type the password one more time to make sure we've
-                    both got it correct.</p>
-                  <Field type="password" name="passwordConfirm" id="passwordConfirm" />
-                  <ErrorMessage className="form-error" name="passwordConfirm" component="div" />
+                  <button className="button create-account-button">Create Account</button>
                 </div>
               </Form>
             )}

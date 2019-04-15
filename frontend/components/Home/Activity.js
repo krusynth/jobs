@@ -33,8 +33,6 @@ export default class Activity extends Component {
 }
 
 const ActivityCard = function(props) {
-  console.log('activity', props);
-
   let active = 'card-active';
   let result = '';
   if(typeof props.result !== 'undefined') {

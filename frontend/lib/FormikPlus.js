@@ -1,5 +1,5 @@
-import React from 'react';
-import { Formik, isString, isFunction, warnAboutMissingIdentifier, setIn } from 'formik';
+import React, { Component } from 'react';
+import { Formik, Field, ErrorMessage, isString, isFunction, warnAboutMissingIdentifier, setIn } from 'formik';
 
 export default class FormikPlus extends Formik {
   // Extend Formik to be able to handle onBlur events correctly.
@@ -42,4 +42,77 @@ export default class FormikPlus extends Formik {
       });
     }
   };
+}
+
+export class FieldWrapper extends Component {
+  getId() {
+    if(this.props.id) {
+      return this.props.id;
+    }
+    else {
+      return this.nameToId(this.props.name);
+    }
+  }
+
+  // We camelize by default but hyphens are an option.
+  nameToId(name) {
+    if(this.props.idFormat == 'hyphen') {
+      return this.hyphenize(name);
+    }
+    else {
+      return this.camelize(name);
+    }
+  }
+
+  camelize(str) {
+    return str.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function(match, index) {
+      if (+match === 0) return "";
+      return index == 0 ? match.toLowerCase() : match.toUpperCase();
+    });
+  }
+
+  hyphenize(str) {
+    return str.replace(/\s+/, '-').toLowerCase();
+  }
+
+  render() {
+    let identifier = this.getId();
+    return (
+      <div className="form-group">
+        <label htmlFor={identifier}>{this.props.name}</label>
+        {this.props.instructions &&
+          <p id={identifier+"-instructions"}>{this.props.instructions}</p>}
+        {this.props.children}
+        {this.renderErrors(identifier)}
+      </div>
+    )
+  }
+
+  renderErrors(identifier) {
+    if(
+      typeof this.props.formik != 'undefined' &&
+      typeof this.props.formik.touched != 'undefined' &&
+      this.props.formik.touched[identifier] &&
+      typeof this.props.formik.errors != 'undefined' &&
+      this.props.formik.errors[identifier]
+    ) {
+      return (
+        <div className="form-error">
+          {this.props.formik.errors[identifier]}
+        </div>
+      );
+    }
+  }
+}
+
+export class FieldPlus extends FieldWrapper {
+  render() {
+    let identifier = this.getId();
+    return (
+      <FieldWrapper {...this.props}>
+        <Field type={this.props.type} name={identifier} id={identifier}
+          aria-describedby={identifier+"-instructions"}/>
+      </FieldWrapper>
+    );
+  }
 }

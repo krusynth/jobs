@@ -63,50 +63,63 @@ class UserController extends Controller {
       res.status(401).send();
       return;
     }
-
+console.log('readCurrent');
     this.model.findOne(query)
-    .then( data => this._instance = data)
-    .then( this._handleActions )
-    .then( data => {
-      res.send(data);
+    .then( result => this._instance = result)
+    .then( result => this._handleMeta(result) )
+    .then( result => res.send(result))
+    // .catch((error) => {
+    //   res.status(400).send(this.parseErrors(error));
+    // });
+  }
+
+  _handleMeta(data) {
+    return this._handleActions(data)
+    .then( result => this._handleMood(result) )
+    .then((data) => {
+      data.save();
     })
-    .catch((error) => {
-      res.status(400).send(this.parseErrors(error));
+    .then( () => data );
+  }
+
+  _handleActions(data) {
+    return new Promise((resolve, reject) => {
+
+      // If we don't have recent actions...
+      if(
+        typeof data.meta == 'undefined' ||
+        data.meta == null ||
+        typeof data.meta.actionDate == 'undefined' ||
+        moment(data.meta.actionDate).toDate() < moment().subtract(6,'d').toDate()
+      ) {
+
+        // Get four actions.
+        let query = this.buildWhere({
+          order: 'random',
+          limit: 4
+        });
+
+        return Action.findAll(query)
+        .then( result => {
+          let meta = data.meta || {};
+          meta.actionDate = new Date();
+          meta.actions = result;
+
+          data.set({
+            meta: meta
+          });
+
+          resolve(data);
+          // return data;
+        })
+      }
+      else {
+        resolve(data);
+      }
     });
   }
 
-  _handleActions = (data) => {
-    // If we don't have recent actions...
-    if(
-      typeof data.meta == 'undefined' ||
-      data.meta == null ||
-      typeof data.meta.actionDate == 'undefined' ||
-      moment(data.meta.actionDate).toDate() < moment().subtract(6,'d').toDate()
-    ) {
-
-      // Get four actions.
-      let query = this.buildWhere({
-        order: 'random',
-        limit: 4
-      });
-
-      return Action.findAll(query)
-      .then( result => {
-        let meta = result.meta || {};
-        meta.actionDate = new Date();
-        meta.actions = result;
-
-        data.set({
-          meta: meta
-        });
-        return data.save();
-      })
-      .then( result => {
-        // Hoist our data and return it.
-        return data;
-      });
-    }
-
+  _handleMood(data) {
     return data;
   }
 

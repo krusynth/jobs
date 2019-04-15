@@ -236,8 +236,16 @@ $timelineHeight: 2.5rem;
   // }
 }
 
+.event-form-wrapper {
+  @extend .modal;
+  display: block;
+}
+
 .event-form {
+  background-color: $white;
   @extend .form-box;
+  max-width: 70%;
+  margin: 1.75rem auto;
 }
 
 .job-actions {
@@ -252,6 +260,6 @@ $timelineHeight: 2.5rem;
   @extend .col-md-8;
 
   textarea {
-    height: 12rem;
+    height: 25rem;
   }
 }

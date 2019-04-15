@@ -2,6 +2,35 @@ import React, { Component } from 'react';
 import DatePick from 'lib/DatePick';
 
 export default class JobEventForm extends Component {
+  defaultNotes = `Notes about this organization:
+
+* What does this organization do?
+
+* Why did I apply?
+
+* Who am I interviewing with? What do they do?
+
+
+
+Accomplishments I want to highlight about myself:
+
+
+
+Questions I want to ask:
+
+* What would success look like for someone in this role?
+
+* Tell me about your organization's culture.
+
+* Why did the previous person leave this role?
+
+* What sort of continuing education opportunities do you offer?
+
+* What other benefits do you offer?
+
+* What are the next steps here? When will I hear back from you?
+
+`;
   constructor(props) {
     super(props);
 
@@ -16,8 +45,19 @@ export default class JobEventForm extends Component {
     });
   }
 
+
   render() {
+    // If this is for a new interview, let's set some default notes.
+    // TODO: convert to Formik.
+    // TODO: if this field hasn't changed reset on type change.
+    if(!this.state.id && !this.state.notes && this.state.type == 'Interview') {
+      this.setState({
+        notes: this.defaultNotes
+      });
+    }
+
     return (
+    <div className="event-form-wrapper">
       <form
         className="event-form"
         onSubmit={ (e) => {e.preventDefault(); this.props.submitForm(this.state)} }
@@ -97,6 +137,7 @@ export default class JobEventForm extends Component {
           >Delete</button>}
         </div>
       </form>
+    </div>
     );
   }
 }
