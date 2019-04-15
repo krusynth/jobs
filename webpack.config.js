@@ -76,7 +76,8 @@ module.exports = {
     // new NodemonPlugin(),
     new ExtractTextPlugin("css/styles.css"),
     new CopyWebpackPlugin([
-      { from: './assets/fonts/fontawesome/*', to: './fonts/fontawesome/', flatten:true },
+      { from: './assets/fonts', to: './fonts/', flatten:true },
+      { from: './assets/images', to: './images/', flatten: false }
     ])
   ],
   devtool: 'source-map'
