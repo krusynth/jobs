@@ -6,6 +6,10 @@ h1 {
   display: inline-block;
 }
 
+.tagline {
+  font-size: 1.4rem;
+}
+
 .status-wrapper {
   @extend .col-md-12;
 }
@@ -16,4 +20,11 @@ h1 {
 
 .activity-wrapper {
   @extend .col-md-3;
+}
+
+.screenshot {
+  max-width: 100%;
+  border: 3px solid $gray-800;
+  padding: 5px;
+  @extend.shadow;
 }
