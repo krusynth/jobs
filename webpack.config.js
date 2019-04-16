@@ -76,7 +76,7 @@ module.exports = {
     // new NodemonPlugin(),
     new ExtractTextPlugin("css/styles.css"),
     new CopyWebpackPlugin([
-      { from: './assets/fonts', to: './fonts/', flatten:true },
+      { from: './assets/fonts', to: './fonts/', flatten: false },
       { from: './assets/images', to: './images/', flatten: false }
     ])
   ],
