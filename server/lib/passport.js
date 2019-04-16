@@ -4,6 +4,8 @@ const config = require('../config.js');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const { User } = require('../models');
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -23,7 +25,7 @@ passport.use(new LocalStrategy(
     };
 
     if(config.db.dialect === 'postgres') {
-      query.where.email = {$ilike: email};
+      query.where.email = {[Op.iLike]: email};
     }
     else {
       query.where.email = email;
