@@ -7,40 +7,39 @@ export default class Header extends Component {
   model = new AuthModel();
 
   noUserNav() {
-    return (<ul className="navbar-nav mr-auto">
-      <li className="nav-item">
-        <Link to="/" className="nav-link">Home</Link>
-      </li>
+    return (<React.Fragment>
       <li className="nav-item">
         <Link to="/signup/" className="nav-link">Signup</Link>
       </li>
       <li className="nav-item">
         <Link to="/login/" className="nav-link">Login</Link>
       </li>
-    </ul>);
+    </React.Fragment>);
   }
 
   userNav() {
-    return (<ul className="navbar-nav mr-auto">
+    return (<React.Fragment>
       <li className="nav-item">
-        <Link to="/" className="nav-link">Home</Link>
+        My Account
       </li>
       <li className="nav-item">
         <Link to="/logout/" className="nav-link">Logout</Link>
       </li>
-    </ul>);
+    </React.Fragment>);
   }
 
+  // No main nav right now.
+  mainNav() {}
+
   adminNav() {
-    return (<ul className="navbar-nav mr-auto">
+    return (<React.Fragment>
       <li className="nav-item">
         <Link to={`/admin/users/`} className="nav-link">Users</Link>
       </li>
-
       <li className="nav-item">
         <Link to={`/admin/userlevels/`} className="nav-link">User Levels</Link>
       </li>
-    </ul>);
+    </React.Fragment>);
   }
 
   render() {
@@ -51,10 +50,18 @@ export default class Header extends Component {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          { this.props.userLevel === 0 && this.noUserNav() }
-          { this.props.userLevel > 0 && this.userNav() }
-          { this.props.userLevel === 2 && this.adminNav() }
+        <div className="collapse navbar-collapse menu-links" id="navbarSupportedContent">
+          <ul className="navbar-nav main-nav">
+            <li className="nav-item">
+              <Link to="/" className="nav-link">Home</Link>
+            </li>
+            { this.props.userLevel > 0 && this.mainNav() }
+            { this.props.userLevel === 2 && this.adminNav() }
+          </ul>
+          <ul className="navbar-nav user-nav">
+            { this.props.userLevel > 0 && this.userNav() }
+            { this.props.userLevel === 0 && this.noUserNav() }
+          </ul>
         </div>
       </nav>
     </header>);

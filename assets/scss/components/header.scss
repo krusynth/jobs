@@ -24,6 +24,10 @@
   }
 }
 
+.menu-links {
+  justify-content: space-between;
+}
+
 .navbar {
   @extend .container;
   padding-top: 0;
