@@ -20,7 +20,7 @@ export default class Header extends Component {
   userNav() {
     return (<React.Fragment>
       <li className="nav-item">
-        My Account
+        <Link to="/account/" className="nav-link">My Account</Link>
       </li>
       <li className="nav-item">
         <Link to="/logout/" className="nav-link">Logout</Link>

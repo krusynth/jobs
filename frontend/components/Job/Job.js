@@ -181,21 +181,24 @@ export default class Job extends AsyncComponent {
             isSubmitting,
            }) => (
             <Form className="job-form job-edit-form">
-              <header className="row">
+              <header className="job-form-title">
                 <SaveStatus status={this.state.status}/>
 
-                  <div className="form-group job-name">
-                    <Field type="text" name="name" id="name"
-                      placeholder="Position Name" className="form-control" />
-                    <ErrorMessage className="form-error" name="name" component="div" />
-                  </div>
+                <div className="job-name">
+                  <label for="name">Job Title</label>
+                  <Field type="text" name="name" id="name"
+                    placeholder="Job Title" className="form-control" />
+                  <ErrorMessage className="form-error" name="name" component="div" />
+                </div>
 
-                  <div className="form-group company-name">
-                    <span className="plain-text">at</span>
-                    <Field type="text" name="company" id="company"
-                      placeholder="Company" className="form-control" />
-                    <ErrorMessage className="form-error" name="company" component="div" />
-                  </div>
+                <span className="plain-text at-text">at</span>
+
+                <div className="company-name">
+                  <label for="company">Company</label>
+                  <Field type="text" name="company" id="company"
+                    placeholder="Company" className="form-control" />
+                  <ErrorMessage className="form-error" name="company" component="div" />
+                </div>
               </header>
               <header className="button-group">
                 { this.watchButton() }

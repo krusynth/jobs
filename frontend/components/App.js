@@ -13,6 +13,7 @@ import Login  from 'components/Auth/Login';
 import Logout from 'components/Auth/Logout';
 import Job    from 'components/Job/Job';
 import Signup from 'components/Profile/Signup';
+import EditAccount from 'components/Profile/EditAccount';
 
 import UserModel from 'models/UserModel';
 
@@ -80,6 +81,12 @@ class App extends AsyncComponent {
               />
 
               <PrivateRoute path="/logout/" component={Logout}
+                authed={this.state.user.userLevelId}
+                redirectTo="/"
+                refresh={this.refresh}
+              />
+
+              <PrivateRoute path="/account/" component={EditAccount}
                 authed={this.state.user.userLevelId}
                 redirectTo="/"
                 refresh={this.refresh}

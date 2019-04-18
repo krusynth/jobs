@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import UserForm from './UserForm';
 
-export default class Signup extends UserForm {
-  submitButtonText = 'Create Account';
+export default class EditAccount extends UserForm {
+  submitButtonText = 'Save Account';
 
   saveData(values) {
     return this.model.create(values);
@@ -13,7 +13,7 @@ export default class Signup extends UserForm {
   render() {
     return(
       <section>
-        <h1>Signup</h1>
+        <h1>My Account</h1>
         { this.showForm() }
       </section>
     );

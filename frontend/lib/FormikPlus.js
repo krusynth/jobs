@@ -78,7 +78,7 @@ export class FieldWrapper extends Component {
   render() {
     let identifier = this.getId();
     return (
-      <div className="form-group">
+      <div className="field-group">
         <label htmlFor={identifier}>{this.props.name}</label>
         {this.props.instructions &&
           <p id={identifier+"-instructions"}>{this.props.instructions}</p>}

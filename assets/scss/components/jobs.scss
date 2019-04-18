@@ -34,36 +34,65 @@
 
 
 .job-form {
-  .field-group {
-    @extend .col-md-6;
-  }
+  &-title {
+    @include media-breakpoint-up(sm) {
+      display: flex;
 
-  .job-name {
-    @extend .col-md-6;
-  }
-  .company-name {
-    @extend .col-md-5;
+      .job-name {
+        flex-grow: 1;
+      }
 
-    .plain-text {
-      line-height: 3rem;
-      position: absolute;
+      .at-text {
+        flex-grow: 0;
+        margin-top: 1.5rem;
+      }
+
+      .company-name {
+        flex-grow: 1;
+      }
+
+      .save-status {
+        order: 5;
+        flex-grow: 0;
+        align-self: flex-end;
+      }
+
+      .job-name, .company-name {
+        input {
+          padding: 0 0.5rem;
+          font-size: 2.0rem;
+          font-weight: bold;
+        }
+      }
     }
 
-    input {
-      margin-left: 2rem;
+    @include media-breakpoint-down(sm) {
+      .at-text {
+        position: absolute;
+      }
+
+      .company-name label {
+        margin-left: 1.25rem;
+      }
     }
+
+    align-items: center;
+
+    & > * {
+      margin-right: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    margin-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
   }
 
   .button-group {
     margin-bottom: 0.5rem;
-  }
-
-  .job-name, .company-name {
-    input {
-      padding: 0 0.5rem;
-      font-size: 2.0rem;
-      font-weight: bold;
-    }
   }
 
   .toggle-watch-button {
@@ -101,11 +130,6 @@
       @extend .fa-trash-alt;
       margin-right: 0.25rem;
     }
-  }
-
-  .save-status {
-    @extend.col-md-1;
-    @extend .order-2;
   }
 
   .job-description {
