@@ -8,6 +8,8 @@ import Header from 'components/modules/Header';
 import Footer from 'components/modules/Footer';
 
 import Home   from 'components/Home/Home';
+import About  from 'components/Home/About';
+import TermsOfService from 'components/Home/TermsOfService';
 import Admin  from 'components/Admin/Admin';
 import Login  from 'components/Auth/Login';
 import Logout from 'components/Auth/Logout';
@@ -67,6 +69,10 @@ class App extends AsyncComponent {
                 user={this.state.user}
                 refresh={this.refresh}
               />
+
+              <PropsRoute exact path="/about/" component={About}/>
+
+              <PropsRoute exact path="/tos/" component={TermsOfService}/>
 
               <PublicRoute path="/login/" component={Login}
                 authed={this.state.user.userLevelId}
