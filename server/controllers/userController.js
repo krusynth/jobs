@@ -39,6 +39,7 @@ class UserController extends Controller {
   }
 
   beforeCreate(req, res) {
+    this.authField = null;
     let data = req.body;
     // Hardcode our user level value.
     // TODO: look this up somewhere.
@@ -63,14 +64,24 @@ class UserController extends Controller {
       res.status(401).send();
       return;
     }
-console.log('readCurrent');
+
     this.model.findOne(query)
-    .then( result => this._instance = result)
     .then( result => this._handleMeta(result) )
+    .then( this._readById )
     .then( result => res.send(result))
-    // .catch((error) => {
-    //   res.status(400).send(this.parseErrors(error));
-    // });
+    .catch(this.catchErrors);
+  }
+
+  _readById(result) {
+    // Convert Sequelize instance to plain object.
+    let data = result.get();
+
+    // Remove our private fields.
+    delete data['password'];
+    delete data['salt'];
+    delete data['token'];
+
+    return data;
   }
 
   _handleMeta(data) {
@@ -133,6 +144,14 @@ console.log('readCurrent');
     }
 
     return this.update(req, res, next);
+  }
+
+  beforeUpdate(data) {
+    return Controller.prototype.beforeUpdate(data)
+    .then( data => {
+      delete data.userLevelId;
+      return data;
+    })
   }
 }
 

@@ -5,6 +5,8 @@ const Sequelize = require('sequelize');
 const models = require('../models');
 const extend = require('util')._extend;
 
+// TODO: finish normalizing interfaces (req/res -> this.req/this.res)
+
 class Controller {
   // Access to our models.
   models = models;
@@ -33,8 +35,8 @@ class Controller {
   // If this data is restricted to a given user, which field to use?
   authField = null; // 'userId';
 
-  // Temporary reference to our current instance.
-  _instance = null;
+  req = null;
+  res = null;
 
   constructor(app) {
     this.app = app;
@@ -105,7 +107,6 @@ class Controller {
     query = this.authQuery(query, req, res);
 
     this.model.findOne(query)
-    .then( data => this._instance = data)
     .then(this._readById)
     .then( data => {
       res.send(data);
@@ -121,7 +122,7 @@ class Controller {
     .then((args) => this.doCreate(args))
     .then((args) => this.afterCreate(args))
     .catch( (error) => {
-      console.log('create error', error);
+      console.log('error', error);
       res.status(400).send(this.parseErrors(error));
     });
   }
@@ -146,39 +147,42 @@ class Controller {
   }
 
   update(req, res, next) {
-    let query = {where: {'id' : req.params.id}};
-    query = this.authQuery(query, req, res);
+    this.req = req;
+    this.res = res;
 
-    this.model.findOne(query).then( (instance) => {
-      this._instance = instance;
-
-      let updateData = extend({}, req.body);
-      delete updateData.updatedAt;
-      delete updateData.createdAt;
-      this._instance.set(updateData);
-      let changedData = this._instance.changed();
-
-      this._instance.save().then( (data) => {
-        data.changed = changedData;
-
-        this.afterUpdate(data, req, res).then((result) => {
-          this.readById(result[0], result[1]);
-        });
-      }).catch( (error) => {
-        console.log('error', error);
-        res.status(400).send(this.parseErrors(error));
-      });
-    }).catch( (error) => {
-      console.log('error', error);
-      res.status(400).send(this.parseErrors(error));
-    });
+    return this.beforeUpdate(this.req.body)
+    .then(args => this.doUpdate(args))
+    .then(args => this.afterUpdate(args))
+    .catch(args => this.catchErrors(args));
   }
 
-  afterUpdate(data, req, res) {
-    return (Promise.resolve([req, res]));
+  beforeUpdate(data) {
+    data = data || {};
+    delete data.createdAt;
+    delete data.updatedAt;
+
+    return Promise.resolve(data);
+  }
+
+  doUpdate(data) {
+    let query = {where: {'id' : data.id}};
+    query = this.authQuery(query, this.req, this.res);
+
+    return this.model.findOne(query)
+    .then(instance => {
+      instance.set(data);
+      return instance.save();
+    })
+  }
+
+  afterUpdate(data) {
+    return this.readById(this.req, this.res);
   }
 
   updateMany(req, res, next) {
+    this.req = req;
+    this.res = res;
+
     // Expects the req.body.id to be a list of ids.
     // We unset that so it won't be in the update data.
     let updateData = extend({}, req.body);
@@ -187,34 +191,45 @@ class Controller {
     this.model.update(
       updateData,
       {where: {'id' : {$in: req.body.id}}}
-    ).then( (data) => {
-      this.afterUpdateMany(data, req, res).then((result) => {
-        result[1].send();
-      });
-    });
+    )
+    .then(args => this.afterUpdateMany(args))
+    .catch(args => this.catchErrors(args));
   }
 
-  afterUpdateMany(data, req, res) {
-    return (Promise.resolve([req, res]));
+  afterUpdateMany(data) {
+    this.req.send({'message': 'ok'})
   }
 
   delete(req, res, next) {
-    let query = {where: {id : req.params.id}};
-    query = this.authQuery(query, req, res);
+    this.req = req;
+    this.res = res;
 
-    this.model.destroy(query).then( (data) => {
-      this.afterDelete(data, req, res).then((result) => {
-        result[1].send({'message': 'ok'});
-      });
-    }).catch( (error) => {
-      console.log('error', error);
-      res.status(400).send(this.parseErrors(error));
-    });
+    this.beforeDelete(req.body)
+    .then(args => this.doDelete(args))
+    .then(args => this.afterDelete(args))
+    .catch(args => this.catchErrors(args));
   }
 
-  afterDelete(data, req, res) {
-    return (Promise.resolve([req, res]));
+  beforeDelete(data) {
+    return Promise.resolve(data);
   }
+
+  doDelete(data) {
+    let query = {where: {id : this.req.params.id}};
+    query = this.authQuery(query, this.req, this.res);
+
+    return this.model.destroy(query)
+  }
+
+  afterDelete(data) {
+    this.res.send({'message': 'ok'})
+  }
+
+  catchErrors(error) {
+    console.log('error', error);
+    this.res.status(400).send(this.parseErrors(error));
+  }
+
 
   parseErrors(error) {
     if(typeof error.errors === 'undefined' &&
@@ -258,7 +273,6 @@ class Controller {
         }
       }
       else if(typeof reqQuery.order == 'string') {
-        console.log('order', reqQuery.order);
         query.order = [reqQuery.order.split(' ')];
       }
       else {
