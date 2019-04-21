@@ -3,8 +3,17 @@ import { Link } from 'react-router-dom';
 
 export default function Footer () {
   return (
-    <footer>
-
+    <footer className="footer">
+      <nav className="footer-nav navbar">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <Link to="/about/" className="nav-link">About</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/tos/" className="nav-link">Terms of Service</Link>
+          </li>
+        </ul>
+      </nav>
     </footer>
   );
 }
