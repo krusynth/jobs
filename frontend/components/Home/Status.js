@@ -20,7 +20,8 @@ export default class Status extends Component {
   userMoodModel = new UserMoodModel();
 
   componentDidMount() {
-    this.getRecent();
+    // Todo: finish this.
+    // this.getRecent();
   }
 
   getRecent() {
