@@ -13,7 +13,6 @@ Yup.addMethod(Yup.mixed, 'equalTo', function(ref, message) {
     const msg = message || '${path} should match ${ref.path}';
     return this.test('equalTo', msg, function (value) {
       let refValue = this.resolve(ref);
-      console.log('refValue', refValue === value);
       return value === refValue;
     })
 })
