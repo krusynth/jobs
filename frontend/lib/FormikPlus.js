@@ -110,7 +110,10 @@ export class FieldPlus extends FieldWrapper {
     let identifier = this.getId();
     return (
       <FieldWrapper {...this.props}>
-        <Field type={this.props.type} name={identifier} id={identifier}
+        <Field type={this.props.type}
+          className="form-control"
+          name={identifier}
+          id={identifier}
           aria-describedby={identifier+"-instructions"}/>
       </FieldWrapper>
     );
