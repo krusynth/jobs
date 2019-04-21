@@ -1,0 +1,24 @@
+.footer {
+  background-color: lighten($teal, 40%);
+  $mainFooterColor: $gray-800;
+  font-size: 0.9rem;
+
+  &-nav {
+    .navbar-nav {
+      flex-direction: row;
+    }
+  }
+
+  .nav-link {
+    color: $mainFooterColor;
+    border-bottom: 1px solid rgba($mainFooterColor,1);
+    transition: border 0.25s;
+    padding: 0;
+    margin: 0.5rem 1rem;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: 1px solid rgba($mainFooterColor,0);
+    }
+  }
+}

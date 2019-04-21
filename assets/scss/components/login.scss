@@ -1,0 +1,23 @@
+.login-form {
+  @extend .col-md-6;
+  align-self: flex-start;
+
+  &-errors {
+    margin-bottom: 0;
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+    li {
+      @extend .alert;
+      @extend .alert-danger;
+    }
+  }
+
+  &-submit {
+    @extend .btn;
+    @extend .btn-success;
+    align-self: flex-start;
+  }
+}

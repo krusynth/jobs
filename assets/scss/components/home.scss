@@ -1,9 +1,14 @@
 .main {
   margin-bottom: 2rem;
+  min-height: calc(100vh - 7.7rem); /* Full height minus (header + footer) */
+}
+
+.default-home {
+  @extend .col-md-8;
 }
 
 h1 {
-  display: inline-block;
+  width: 100%;
 }
 
 .tagline {
