@@ -34,10 +34,10 @@ export default class Header extends Component {
   adminNav() {
     return (<React.Fragment>
       <li className="nav-item">
-        <Link to={`/admin/users/`} className="nav-link">Users</Link>
+        <Link to="/admin/users/" className="nav-link">Users</Link>
       </li>
       <li className="nav-item">
-        <Link to={`/admin/userlevels/`} className="nav-link">User Levels</Link>
+        <Link to="/admin/userlevels/" className="nav-link">User Levels</Link>
       </li>
     </React.Fragment>);
   }
@@ -45,7 +45,7 @@ export default class Header extends Component {
   render() {
     return (<header className="main-header">
       <nav className="navbar navbar-expand-lg">
-        <h1 className="navbar-brand">Job.Hunt.Works</h1>
+        <span className="navbar-brand">Job.Hunt.Works</span>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>

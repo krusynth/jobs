@@ -1,9 +1,11 @@
 .field-group {
-  @extend .col-md-6;
   margin-bottom: 1rem;
 
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
   label {
-    display: block;
     font-weight: bold;
 
     .plain-text {
@@ -13,7 +15,12 @@
 }
 
 .form-error {
+  @extend .alert;
+  @extend .alert-danger;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
   font-style: italic;
+  padding: 0.5rem .75rem;
 }
 
 .button {

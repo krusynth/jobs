@@ -44,7 +44,7 @@ export default class Login extends Component {
 
 
     return (
-      <section>
+      <section className="login-form">
         { this.state.redirect && <Redirect to={this.state.redirect} /> }
         <header>
           <h1>Login</h1>
@@ -52,7 +52,7 @@ export default class Login extends Component {
         <form
           onSubmit={this.handleSubmit}
         >
-          <div className="field-group errors">
+          <div className="field-group errors login-form-errors">
             <ul>
               { this.state.errors.map( (error, i) => <li key={i}>{error}</li>) }
             </ul>
@@ -86,7 +86,7 @@ export default class Login extends Component {
             <input
               type="submit"
               value="Login"
-              className="btn btn-success"
+              className="login-form-submit"
               onClick={this.handleSubmit}
             />
           </div>

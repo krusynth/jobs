@@ -94,7 +94,7 @@ class App extends AsyncComponent {
 
               <PrivateRoute path="/account/" component={EditAccount}
                 authed={this.state.user.userLevelId}
-                redirectTo="/"
+                user={this.state.user}
                 refresh={this.refresh}
               />
 

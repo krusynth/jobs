@@ -3,10 +3,15 @@
   @extend .btn-success;
 }
 
-.user-form {
+.signup-form {
   @extend .row;
 
-  .field-group {
-    @extend .col-md-12;
+  .tos,
+  .success-message {
+    @extend .col-md-6;
   }
+}
+
+.user-form, {
+  @extend .col-md-6;
 }

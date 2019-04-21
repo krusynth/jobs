@@ -61,8 +61,9 @@ export default class Jobs extends Component {
       });
     }
     else {
-      result = (<p>
-        Click the <span className="plus">+</span> above to begin tracking your
+      result = (<p className="jobs-add-message">
+        <span className="point-up"></span>
+        Click the <span className="plus">+</span> button above to begin tracking your
         first job!
       </p>);
     }

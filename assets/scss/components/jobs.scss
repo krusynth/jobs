@@ -19,21 +19,41 @@
 }
 
 .jobs-button-add {
+  margin-left: 0;
+  margin-bottom: 1rem;
   font-size: 0.85rem;
   .icon {
     margin-right: 0.25rem;
   }
 }
 
+.jobs {
+  &-add-message {
+    @extend .alert;
+    @extend .alert-info;
+
+    .point-up {
+      @extend .fas;
+      @extend .fa-arrow-up;
+      margin-right: 0.25rem;
+    }
+  }
+}
+
 /* Job Form */
 
 .job-create-form {
-  @extend .row;
   margin-bottom: 1rem;
+  display: flex;
+  align-items: flex-end;
 }
 
 
 .job-form {
+  .jobs & .field-group{
+    margin-right: 1rem;
+  }
+
   &-title {
     @include media-breakpoint-up(sm) {
       display: flex;

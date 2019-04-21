@@ -43,9 +43,9 @@ export default class JobCreateForm extends Component {
           <label><span className="plain-text">at</span> Company</label>
           <input
             type="text"
-            name="name"
+            name="company"
             className="form-control"
-            value={this.state.name}
+            value={this.state.company}
             onChange={this.handleChange} />
         </div>
 

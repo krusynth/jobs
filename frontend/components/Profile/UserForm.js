@@ -2,34 +2,21 @@
 
 import React, { Component } from 'react';
 import AsyncComponent from 'lib/AsyncComponent';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom';
 import { FieldPlus } from 'lib/FormikPlus';
 
 import UserModel from 'models/UserModel';
 
-const signupSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .min(1, 'Please tell us your name.')
-    .max(100, 'Whoa, that\'s a long name. Do you use a shorter name?')
-    .required('Please tell us your name.'),
-  lastName: Yup.string()
-    .min(1, 'Please tell us your name.')
-    .max(100, 'Whoa, that\'s a long name. Do you use a shorter name?')
-    .required('Please tell us your name.'),
-  email: Yup.string()
-  /* TODO: create a feedback mechanism for this validation! */
-    .email('That email address doesn\'t appear to be a real email address.')
-    .required('Please tell us your email address.'),
-  password: Yup.string()
-    .min(6, 'Please choose a longer password.')
-    .max(254, 'Whoa, that password is too long for us. Can you please choose one shorter than 254 characters?')
-    .required('Please create a password.'),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref('password'), null], "Your passwords don't match. Please try again?")
-    .required('Please confirm your password.'),
-});
+Yup.addMethod(Yup.mixed, 'equalTo', function(ref, message) {
+    const msg = message || '${path} should match ${ref.path}';
+    return this.test('equalTo', msg, function (value) {
+      let refValue = this.resolve(ref);
+      console.log('refValue', refValue === value);
+      return value === refValue;
+    })
+})
 
 export default class UserForm extends AsyncComponent {
   model = new UserModel();
@@ -46,9 +33,30 @@ export default class UserForm extends AsyncComponent {
     success: false
   };
 
+  schema = Yup.object().shape({
+    firstName: Yup.string()
+      .min(1, 'Please tell us your first name.')
+      .max(100, 'Whoa, that\'s a long name. Do you use a shorter name?')
+      .required('Please tell us your first name.'),
+    lastName: Yup.string()
+      .min(1, 'Please tell us your last name.')
+      .max(100, 'Whoa, that\'s a long name. Do you use a shorter name?')
+      .required('Please tell us your last name.'),
+    email: Yup.string()
+    /* TODO: create a feedback mechanism for this validation! */
+      .email('That email address doesn\'t appear to be a real email address.')
+      .required('Please tell us your email address.'),
+    password: Yup.string()
+      .min(6, 'Please choose a longer password.')
+      .max(254, 'Whoa, that password is too long for us. Can you please choose one shorter than 254 characters?'),
+    confirmPassword: Yup.string()
+      .equalTo(Yup.ref('password'), "Your passwords don't match. Please try again?")
+  });
+
+  title = 'Edit Account';
   submitButtonText = 'Submit Form';
 
-  handleSubmit = (values, actions) => {
+  handleSubmit(values, actions) {
     this.saveData(values)
     .then( () => {
       actions.setSubmitting(false);
@@ -81,48 +89,51 @@ export default class UserForm extends AsyncComponent {
   }
 
   render() {
-    return(
-      <section>
-        { this.showForm() }
-      </section>
-    );
+    return (<section>
+      <h1>{this.title}</h1>
+      {this.state.success && this.success()}
+      {!this.state.success && this.showForm()}
+    </section>);
+  }
+
+  success() {
+    return(<section className="user-form-message success-message">
+      Your account was saved!
+    </section>);
   }
 
   showForm() {
-    if(this.state.success) {
-      return (<React.Fragment>
-        <p>Your account has been created.</p>
-        <p><Link to="/login/" className="btn btn-lg btn-success">Login!</Link></p>
-      </React.Fragment>);
-    }
-    else {
-      return (
-          <Formik
-            initialValues={this.state.user}
-            validationSchema={signupSchema}
-            onSubmit={this.handleSubmit}
-          >
-            {(formik) => (
-              <Form className="user-form">
-                <FieldPlus name="First Name" formik={formik} />
+    return (
+      <Formik
+        initialValues={this.state.user}
+        validationSchema={this.schema}
+        onSubmit={this.handleSubmit.bind(this)}
+      >
+        {(formik) => (
+          <Form className="user-form">
 
-                <FieldPlus name="Last Name" formik={formik} />
+            <Field type="hidden" name="id" />
 
-                <FieldPlus name="Email" type="email" formik={formik} />
+            <FieldPlus name="First Name" formik={formik} />
 
-                <FieldPlus name="Password" type="password" formik={formik}
-                  instructions="Please pick a good password - preferably one you haven't used somewhere else." />
+            <FieldPlus name="Last Name" formik={formik} />
 
-                <FieldPlus name="Confirm Password" type="password" formik={formik}
-                  instructions="Please type the password one more time to make sure we've both got it correct." />
+            <FieldPlus name="Email" type="email" formik={formik} />
 
-                <div className="form-group">
-                  <button className="button create-account-button">{ this.submitButtonText }</button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-      );
-    }
+
+
+            <FieldPlus name="Password" type="password" formik={formik}
+              instructions="Please pick a good password - preferably one you haven't used somewhere else." />
+
+            <FieldPlus name="Confirm Password" type="password" formik={formik}
+              instructions="Please type the password one more time to make sure we've both got it correct." />
+
+            <div className="form-group">
+              <button className="button create-account-button">{ this.submitButtonText }</button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    );
   }
 }
