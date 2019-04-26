@@ -31,11 +31,11 @@ export default function About() {
         <img className="screenshot" src="/images/screenshots/helpers.png"/>
       </p>
       <p>
-        <strong>Sign up today for free! No credit card required!</strong>
+        <strong>Sign up today for free. No credit card required.</strong>
       </p>
       <p className="button-group">
-        <Link to="/signup/" className="btn btn-lg btn-primary">Sign Up!</Link>
-        <Link to="/login/"  className="btn btn-lg btn-success">Login!</Link>
+        <Link to="/signup/" className="btn btn-lg btn-primary">Sign Up</Link>
+        <Link to="/login/"  className="btn btn-lg btn-success">Login</Link>
       </p>
     </section>
   );
