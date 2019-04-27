@@ -30,7 +30,7 @@ const jobSchema = Yup.object().shape({
     .required('Please fill out the company name.'),
 
   description: Yup.string()
-    .max(2048, 'The description is a bit too long, please use a shorter description (2048 characters or less).')
+    .max(10000, 'The description is a bit too long, please use a shorter description (10000 characters or less).')
     .nullable(),
 
   contacts: Yup.string()
