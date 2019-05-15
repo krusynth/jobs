@@ -12,6 +12,8 @@ const passport = require('../lib/passport');
 
 const config = require('../config.js');
 
+const sgMail = require('@sendgrid/mail');
+
 class App {
 
 	constructor(config) {
@@ -23,6 +25,7 @@ class App {
 		this.controllers = {};
 
     this.passport = passport;
+    this.mailer = sgMail;
 
 		this.init();
 	}
@@ -42,7 +45,8 @@ class App {
 
     this.express.use(config.session.handler);
 
-    mailer.extend(this.express, this.config.mail);
+    // mailer.extend(this.express, this.config.mail);
+    this.mailer.setApiKey(this.config.mail.api);
 
     this.express.use(this.passport.initialize());
     this.express.use(this.passport.session());

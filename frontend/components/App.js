@@ -15,6 +15,8 @@ import Login  from 'components/Auth/Login';
 import Logout from 'components/Auth/Logout';
 import Job    from 'components/Job/Job';
 import Signup from 'components/Profile/Signup';
+import ForgotPassword from 'components/Profile/ForgotPassword';
+import ResetPassword from 'components/Profile/ResetPassword';
 import EditAccount from 'components/Profile/EditAccount';
 
 import UserModel from 'models/UserModel';
@@ -81,6 +83,18 @@ class App extends AsyncComponent {
               />
 
               <PublicRoute path="/signup/" component={Signup}
+                authed={this.state.user.userLevelId}
+                redirectTo="/"
+                refresh={this.refresh}
+              />
+
+              <PublicRoute path="/forgotpassword/" component={ForgotPassword}
+                authed={this.state.user.userLevelId}
+                redirectTo="/"
+                refresh={this.refresh}
+              />
+
+              <PublicRoute path="/resetpassword/:token?" component={ResetPassword}
                 authed={this.state.user.userLevelId}
                 redirectTo="/"
                 refresh={this.refresh}

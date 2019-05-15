@@ -1,4 +1,5 @@
-.login-form {
+.login-form,
+.forgot-password {
   @extend .col-md-6;
   align-self: flex-start;
 
@@ -15,9 +16,18 @@
     }
   }
 
+  &-submit-group {
+    flex-direction: row;
+  }
+
   &-submit {
     @extend .btn;
     @extend .btn-success;
-    align-self: flex-start;
+    margin-right: 1rem;
+  }
+
+  &-reset {
+    @extend .btn;
+    @extend .btn-info;
   }
 }

@@ -36,11 +36,12 @@ const config = {
     })
   },
   mail: {
-    from: process.env.MAIL_FROM,
-    host: process.env.MAIL_HOST,
-    secureConnection: process.env.MAIL_SSL !== 'false',
-    port: process.env.MAIL_PORT,
-    transportMethod: process.env.MAIL_METHOD,
+    api: process.env.MAIL_API
+    // from: process.env.MAIL_FROM,
+    // host: process.env.MAIL_HOST,
+    // secureConnection: process.env.MAIL_SSL !== 'false',
+    // port: process.env.MAIL_PORT,
+    // transportMethod: process.env.MAIL_METHOD,
   }
 };
 

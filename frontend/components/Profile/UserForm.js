@@ -3,19 +3,11 @@
 import React, { Component } from 'react';
 import AsyncComponent from 'lib/AsyncComponent';
 import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
+import Yup from 'lib/Yup';
 import { Link } from 'react-router-dom';
 import { FieldPlus } from 'lib/FormikPlus';
 
 import UserModel from 'models/UserModel';
-
-Yup.addMethod(Yup.mixed, 'equalTo', function(ref, message) {
-    const msg = message || '${path} should match ${ref.path}';
-    return this.test('equalTo', msg, function (value) {
-      let refValue = this.resolve(ref);
-      return value === refValue;
-    })
-})
 
 export default class UserForm extends AsyncComponent {
   model = new UserModel();

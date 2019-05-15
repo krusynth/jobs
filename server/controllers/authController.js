@@ -1,7 +1,8 @@
 'use strict';
 
 const express = require('express');
-const mailer = require('express-mailer');
+// const mailer = require('express-mailer');
+const renderEjs = require('../lib/renderEjs');
 const Controller = require('../lib/controller');
 const { User } = require('../models');
 
@@ -52,48 +53,58 @@ class AuthController {
   }
 
   sendToken(req, res, next) {
+    console.log('body', req.body);
     if(req.body.email) {
-      this.model.findOne({where: {email: req.body.email}}).then( (user) => {
-        var token = this.model.generateToken();
-        var forgotLink = req.protocol + '://' + req.headers.host + '/resetpassword/' + token;
+      this.model.findOne({where: {email: req.body.email}})
+      .then( (user) => {
+        if(!user) {
+          return Promise.reject("Couldn't find user.");
+        }
+
+        let token = this.model.generateToken();
         user.token = token;
-        user.save().then( (data) => {
-          res.mailer.send('../views/email/forgotpassword.hbs', {
-            to: user.email,
-            subject: 'Deepbills Password Reset',
-            link: forgotLink
-          }, (error) => {
-            if(error) {
-              console.log('Couldn\'t send email', error);
-              res.status(400).send(error);
-            }
-            else {
-              res.status(200).send();
-            }
+
+        let replaceData = {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          link: req.protocol + '://' + req.headers.host + '/resetpassword/' + token
+        }
+
+        let promise = Promise.all([
+          user.save(),
+          renderEjs('server/views/mail/forgotpassword.html.ejs', replaceData),
+          renderEjs('server/views/mail/forgotpassword.txt.ejs', replaceData)
+        ]);
+        return promise.then( ([data, htmlMessage, textMessage]) => {
+          return this.app.mailer.send({
+            to: req.body.email,
+            from: 'noreply@job.hunt.works',
+            subject: 'Job.Hunt.Works Password Reset',
+            html: htmlMessage,
+            text: textMessage
           });
-        }).catch( (error) => {
-          console.log('Couldn\'t save user', error);
-          res.status(400).send(error);
+        })
+        .then( () => {
+          res.status(200).send({});
         });
       }).catch( (error) => {
-        console.log('Couldn\'t get user', error);
-        res.status(400).send(error);
+        console.log('Couldn\'t send email', error);
+        res.status(400).send({'email': error});
       });
     }
     else {
-      res.status(400).send();
+      res.status(400).send({'email': 'Email address is missing.'});
     }
-    // Todo
   }
 
   checkToken(req, res, next) {
     this.model.findOne({where: {token: req.params.token}}).then( (user) => {
       if(user) {
-        res.status(200).send();
+        res.status(200).send({});
       }
       else {
         console.log('Couldn\'t find user');
-        res.status(404).send();
+        res.status(404).send({error: 'Token not found.'});
       }
     }).catch( (error) => {
       console.log('Error finding user', error);
@@ -107,7 +118,7 @@ class AuthController {
         user.password = req.body.password;
         user.token = '';
         user.save().then( (data) => {
-          res.status(200).send();
+          res.status(200).send({});
         }).catch( (error) => {
           console.log('Error saving user', error);
           res.status(400).send(this.parseErrors(error));
@@ -115,7 +126,7 @@ class AuthController {
       }
       else {
         console.log('Couldn\'t find user');
-        res.status(404).send();
+        res.status(400).send({error: 'Couldn\'t find token.'});
       }
     }).catch( (error) => {
       console.log('Error finding user', error);

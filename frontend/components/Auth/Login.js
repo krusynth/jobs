@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 import AuthModel from 'models/AuthModel';
 
@@ -82,13 +83,16 @@ export default class Login extends Component {
             />
           </div>
 
-          <div className="field-group">
+          <div className="field-group login-form-submit-group">
             <input
               type="submit"
               value="Login"
               className="login-form-submit"
               onClick={this.handleSubmit}
             />
+
+            <Link to="/forgotpassword/" className="login-form-reset">
+              Reset My Password</Link>
           </div>
         </form>
       </section>
