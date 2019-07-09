@@ -5,13 +5,13 @@ import AdminUserLevels from './AdminUserLevels';
 
 export default function Admin ({match}) {
   return (
-    <Router>
+
       <div>
         <Route exact path={`${match.path}`} component={AdminIndex} />
         <Route path={`${match.path}users/`} component={AdminUsers} />
         <Route path={`${match.path}userlevels/`} component={AdminUserLevels} />
       </div>
-    </Router>
+
   );
 }
 
