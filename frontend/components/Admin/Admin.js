@@ -19,7 +19,7 @@ export default function Admin ({match}) {
 
 export function AdminIndex ({match}) {
   return (
-    <section>
+    <section className="block-wrapper">
       <h1>Admin</h1>
       <ul>
         <li><Link to={`${match.url}users/`}>Users</Link></li>

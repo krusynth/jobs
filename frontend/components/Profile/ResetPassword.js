@@ -57,6 +57,8 @@ export default class ResetPassword extends Component {
   }
 
   render() {
+    document.body.className = 'page-reset-password';
+
     let content;
     if(this.state.loading) {
       content = (<p>Loading</p>);

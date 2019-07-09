@@ -18,6 +18,8 @@ export default class Signup extends UserForm {
   }
 
   render() {
+    document.body.className = 'page-signup';
+
     return (<section className="signup-form">
       <h1>{this.title}</h1>
       {this.state.success && this.success()}

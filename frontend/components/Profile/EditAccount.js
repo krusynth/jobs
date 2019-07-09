@@ -22,6 +22,8 @@ export default class EditAccount extends UserForm {
   }
 
   render() {
+    document.body.className = 'page-account';
+
     return (<section>
       <h1>{this.title}</h1>
 

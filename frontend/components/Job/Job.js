@@ -161,8 +161,10 @@ export default class Job extends AsyncComponent {
   }
 
   render() {
+    document.body.className = 'page-job';
+
     return (
-      <article key={'job-'+this.state.job.id} className="job-details job">
+      <article key={'job-'+this.state.job.id} className="job-details job block-wrapper">
         { this.state.redirect && <Redirect to={this.state.redirect} /> }
         <FormikPlus
           initialValues={this.state.job}

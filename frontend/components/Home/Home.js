@@ -5,6 +5,8 @@ import UserHome from './UserHome';
 
 export default class Home extends Component {
   renderHome() {
+    document.body.className = 'page-public-home';
+
     return (<section className="default-home">
       <p className="tagline">
         Hunting for a job is hard. Let's make it work for you!

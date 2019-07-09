@@ -1,10 +1,7 @@
 .status-wrapper {
-  border: 5px solid $teal;
-  border-radius: 10px;
   padding: 11px 15px 7px;
   margin-top: -1.5rem;
   margin-bottom: 2rem;
-  background-color: lighten($teal, 40%);
   @extend .shadow;
 }
 

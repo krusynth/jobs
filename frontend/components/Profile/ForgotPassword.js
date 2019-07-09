@@ -56,6 +56,8 @@ export default class ForgotPassword extends Component {
   }
 
   render() {
+    document.body.className = 'page-forgot-password';
+
     return(
       <section>
         <h1>Reset Password</h1>

@@ -4,8 +4,10 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function About() {
+  document.body.className = 'page-about';
+
   return(
-    <section className="about">
+    <section className="about block-wrapper">
       <h2>About Job.Hunt.Works</h2>
       <p>
         This site is not a jobs board. Instead, it's a set of tools to help you

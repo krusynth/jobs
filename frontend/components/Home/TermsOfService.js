@@ -3,6 +3,8 @@
 import React, { Component } from 'react';
 
 export default function TermsOfService() {
+  document.body.className = 'page-tos';
+
   return(
     <section className="tos">
       <h2>Terms of Service</h2>

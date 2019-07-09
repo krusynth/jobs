@@ -104,7 +104,7 @@ export class AdminCrudList extends Component {
 
   render() {
     return (
-      <section>
+      <section className="block-wrapper">
         <h1>{ this.props.name } List</h1>
 
         <div className="form-actions">

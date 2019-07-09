@@ -1,0 +1,63 @@
+$themeColor: $teal2;
+$themeContrastColor: $white;
+
+$themeComplementColor: $teal2;
+$themeComplementContrastColor: $white;
+
+body {
+  // background: url(/images/page/beige_grunge.jpg);
+  background: linear-gradient(145deg, $teal2 0%, $teal 100%);
+}
+
+.main-header {
+  background: linear-gradient(145deg, $teal2 0%, $teal 100%);
+}
+
+.footer {
+  background-color: $themeComplementColor;
+}
+
+.block-wrapper {
+  background-color: $white;
+}
+
+.page-public-home {
+
+  color: $white;
+
+  .main-header {
+    background: none;
+    box-shadow: none;
+  }
+
+  .footer {
+    color: $white;
+    background: none;
+  }
+}
+
+.status-wrapper {
+  background-color: $white;
+  border: 5px solid $teal2;
+  border-radius: 10px;
+}
+
+.event-response {
+  background-color: $purple;
+}
+
+.event-interview {
+  background-color: $cyan;
+}
+
+.event-applied {
+  background-color: $blue;
+}
+
+.event-offer {
+  background-color: $green;
+}
+
+.event-rejected {
+  background-color: $gray-700;
+}

@@ -34,10 +34,16 @@ export default class Header extends Component {
   adminNav() {
     return (<React.Fragment>
       <li className="nav-item">
+        <Link to="/admin/" className="nav-link">Admin</Link>
+      </li>
+      <li className="nav-item">
         <Link to="/admin/users/" className="nav-link">Users</Link>
       </li>
       <li className="nav-item">
         <Link to="/admin/userlevels/" className="nav-link">User Levels</Link>
+      </li>
+      <li className="nav-item">
+        <Link to="/admin/actions/" className="nav-link">Actions</Link>
       </li>
     </React.Fragment>);
   }

@@ -1,6 +1,5 @@
 .footer {
-  background-color: lighten($teal, 40%);
-  $mainFooterColor: $gray-800;
+  $mainFooterColor: $themeComplementContrastColor;
   font-size: 0.9rem;
 
   &-nav {

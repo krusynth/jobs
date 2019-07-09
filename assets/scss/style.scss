@@ -1,4 +1,5 @@
-$fa-font-path: "/fonts/fontawesome";
+@import './components/settings';
+
 @import 'fontawesome/fontawesome';
 @import 'fontawesome/light';
 @import 'fontawesome/regular';
@@ -7,6 +8,7 @@ $fa-font-path: "/fonts/fontawesome";
 @import 'bootstrap/bootstrap';
 @import '~react-datepicker/dist/react-datepicker.css';
 
+@import './components/theme';
 @import './components/modules';
 @import './components/home';
 @import './components/header';

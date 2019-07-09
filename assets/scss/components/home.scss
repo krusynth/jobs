@@ -15,12 +15,18 @@ h1 {
   font-size: 1.4rem;
 }
 
+.block-wrapper {
+  padding: 0.5rem 1rem 1rem;
+}
+
 .status-wrapper {
   @extend .col-md-12;
 }
 
 .jobs-wrapper {
-  @extend .col-md-9;
+  // @extend .col-md-9;
+  flex: 0 0 calc(75% - 2rem);
+  margin: 0 1rem;
 }
 
 .activity-wrapper {

@@ -6,15 +6,17 @@ import Activity from './Activity';
 
 export default class UserHome extends Component {
   render() {
+    document.body.className = 'page-private-home';
+
     return (
       <section className="row">
-        <div className="status-wrapper">
+        <div className="status-wrapper block-wrapper">
           <Status {...this.props} />
         </div>
-        <div className="jobs-wrapper">
+        <div className="jobs-wrapper block-wrapper">
           <Jobs {...this.props} />
         </div>
-        <div className="activity-wrapper">
+        <div className="activity-wrapper block-wrapper">
           <Activity {...this.props} />
         </div>
       </section>

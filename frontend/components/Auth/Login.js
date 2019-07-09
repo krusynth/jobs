@@ -45,7 +45,7 @@ export default class Login extends Component {
 
 
     return (
-      <section className="login-form">
+      <section className="login-form block-wrapper">
         { this.state.redirect && <Redirect to={this.state.redirect} /> }
         <header>
           <h1>Login</h1>

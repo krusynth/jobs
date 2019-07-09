@@ -83,6 +83,8 @@ Questions I want to ask:
                 <option value="Applied">Applied</option>
                 <option value="Response">Received Response</option>
                 <option value="Interview">Interview</option>
+                <option value="Offer">Received Offer</option>
+                <option value="Rejected">Rejected</option>
               </select>
             </div>
 

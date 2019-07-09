@@ -1,7 +1,5 @@
 .main-header {
-  $mainHeaderColor: $white;
-
-  background-color: $teal;
+  $mainHeaderColor: $themeContrastColor;
   color: $mainHeaderColor;
   margin-bottom: 1rem;
   z-index: 5;

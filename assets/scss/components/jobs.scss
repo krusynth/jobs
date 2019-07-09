@@ -1,5 +1,8 @@
 .job {
+  background-color: rgba($white, 0.5);
+  border: 1px solid $gray-600;
   margin-bottom: 1rem;
+  padding: 0.25rem 0.5rem 0.5rem;
 
   .upcoming-notice {
     @extend .badge;
@@ -52,6 +55,10 @@
 .job-form {
   .jobs & .field-group{
     margin-right: 1rem;
+  }
+
+  .field-group {
+    @extend .col-md-6;
   }
 
   &-title {
@@ -215,7 +222,7 @@ $timelineHeight: 2.5rem;
 }
 
 .job-timeline {
-  background-color: $gray-200;
+  // background-color: rgba($white, 0.5);
   border-radius: 0.25rem;
   padding-left: 0.35rem;
 }
@@ -259,14 +266,6 @@ $timelineHeight: 2.5rem;
   &.selected {
     border: 1px solid $white;
   }
-}
-
-.event-interview {
-  @extend .bg-info;
-}
-
-.event-applied {
-  @extend .bg-success;
 }
 
 .event-interview {

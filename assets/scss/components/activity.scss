@@ -1,5 +1,6 @@
 .activity {
-  @extend .row;
+  display: flex;
+  flex-wrap: wrap;
 
   .title {
     flex: 0 0 100%;
