@@ -42,6 +42,10 @@ const config = {
     // secureConnection: process.env.MAIL_SSL !== 'false',
     // port: process.env.MAIL_PORT,
     // transportMethod: process.env.MAIL_METHOD,
+  },
+  host: {
+    name: process.env.HOSTNAME,
+    port: process.env.PORT
   }
 };
 

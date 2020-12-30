@@ -2,9 +2,24 @@
 
 const crypto = require('crypto');
 const config = require('../config');
+const {
+  Model
+} = require('sequelize');
 
-const User = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+module.exports = (sequelize, DataTypes) => {
+  class User extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+      User.belongsTo(models.UserLevel, {foreignKey: 'userLevelId'});
+      User.hasMany(models.Job, {foreignKey: 'userId'});
+    }
+  }
+  User.init({
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -51,11 +66,15 @@ const User = (sequelize, DataTypes) => {
       }
     }
   }, {
+    sequelize,
     tableName: 'users'
   });
 
   User.beforeCreate((user, options) => {
     user = User.setPassword(user);
+    user.meta = {};
+    user.meta.calendarId = User.generateToken();
+
     return user;
   });
 
@@ -65,10 +84,6 @@ const User = (sequelize, DataTypes) => {
     }
     return user;
   });
-
-  User.associate = function(models) {
-    User.belongsTo(models.UserLevel, {foreignKey: 'userLevelId'});
-  };
 
   User.setPassword = function(user) {
     // We don't have access to all fields by default.
@@ -94,4 +109,3 @@ const User = (sequelize, DataTypes) => {
 
   return User;
 };
-module.exports = User;

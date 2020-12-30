@@ -24,8 +24,12 @@ export default class EditAccount extends UserForm {
   render() {
     document.body.className = 'page-account';
 
-    return (<section>
+    let calendarUrl = `webcal:${window.location.host}/api/calendar/${this.state.user.meta.calendarId}`;
+
+    return (<section className="block-wrapper">
       <h1>{this.title}</h1>
+
+      <a href={calendarUrl}><i className="far fa-calendar-alt"></i> Subscribe to Events Calendar</a>
 
       {this.state.success && this.success()}
       {this.showForm()}
