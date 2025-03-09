@@ -1,7 +1,7 @@
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
-require('dotenv').load();
+require('dotenv').config();
 
 
 // if(typeof(process.env.LOADED) === 'undefined') {
@@ -19,7 +19,8 @@ const config = {
     password: process.env.DB_PASSWORD,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
-    dialect: process.env.DB_DIALECT
+    dialect: process.env.DB_DIALECT,
+    storage: process.env.DB_STORAGE
   },
   session: {
     secret: process.env.SESSION_SECRET,

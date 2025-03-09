@@ -1,0 +1,115 @@
+<%- include('../partials/header.ejs', {'title': data.name + ' at ' + data.company + ' - Job Detail - '}); -%>
+<div class="jobs-wrapper block-wrapper">
+  <form class="job-form job-edit-form" id="job-edit-form" autocomplete="off">
+    <header class="errors">
+      <div id="errors" class="errors"></div>
+    </header>
+    <header class="job-form-title">
+      <div class="field-group">
+        <label for="name">Job Title</label>
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="form-control"
+          maxlength=100
+          value="<%= data.name %>"
+          autocomplete="off"
+          data-1p-ignore
+          required />
+      </div>
+
+      <div class="field-group">
+        <label for="company"><span class="plain-text">at</span> Company</label>
+        <input
+          type="text"
+          name="company"
+          id="company"
+          class="form-control"
+          maxlength=100
+          value="<%= data.company %>"
+          autocomplete="off"
+          data-1p-ignore
+          required />
+      </div>
+    </header>
+
+    <header class="button-group">
+      { this.watchButton() }
+    </header>
+
+    <div class="columns">
+      <div class="column">
+        <div class="field-group">
+          <label for="url">URL</label>
+          <p class="field-info">The website address that you found this job posting.</p>
+          <input
+            type="url"
+            name="url"
+            id="url"
+            class="form-control"
+            maxlength=100
+            placeholder="https://example.com"
+            value="<%= data.url %>"
+            autocomplete="off"
+            data-1p-ignore
+            />
+        </div>
+
+        <div class="field-group">
+          <label for="closes">Date Closes</label>
+          <p class="field-info">The website address that you found this job posting.</p>
+          <input
+            type="date"
+            name="closes"
+            id="closes"
+            class="form-control"
+            value="<%= data.closes %>"
+            autocomplete="off"
+            data-1p-ignore
+            />
+        </div>
+
+        <div class="field-group">
+          <label for="contacts">Contacts</label>
+          <p class="field-info">Anyone you need to remember: hiring manager, etc.</p>
+          <textarea
+            name="contacts"
+            id="contacts"
+            class="form-control textarea"
+             autocomplete="off"
+            data-1p-ignore
+            /><%= data.contacts %></textarea>
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="field-group">
+          <label for="description">Position Description</label>
+          <textarea
+            name="description"
+            id="description"
+            class="form-control textarea textarea-tall"
+             autocomplete="off"
+            data-1p-ignore
+            /><%= data.description %></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="button-group">
+      <input
+        id="edit-job-button"
+        type="submit"
+        class="submit button save-button"
+        value="Save" />
+
+      <button class="button delete-button" id="delete">Delete This Job</button>
+
+    </div>
+
+    <input type="hidden" name="id" value="<%= data.id %>">
+  </form>
+</div>
+
+<%- include('../partials/footer.ejs') %>

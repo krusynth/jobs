@@ -44,26 +44,21 @@
     align-self: end;
   }
 
-  .button {
-    @extend .button-round-sm;
-    @extend .shadow;
-  }
-
   .button + .button {
     margin-left: 0.25rem;
   }
 
   .card-inactive {
     .card-header {
-      background-color: $gray-500;
+      background-color: $gray-dark;
 
       .icon {
-        color: $gray-700;
+        color: $gray-dark;
       }
     }
 
     .card-body {
-      background-color: $gray-400;
+      background-color: $gray-dark;
     }
 
     .card-buttons {

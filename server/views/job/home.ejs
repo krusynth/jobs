@@ -1,0 +1,43 @@
+<section class="row">
+  <div class="status-wrapper block-wrapper">
+    <section className="status">
+      <span className="status-question">How are you doing today?</span>
+      <div className="status-buttons">
+        { Object.entries(buttons).map( button =>
+          this.renderButton(...button)
+        ) }
+      </div>
+      <section className="status-message">
+        {this.state.message}
+      </section>
+    </section>
+  </div>
+  <div class="jobs-wrapper block-wrapper">
+      <section className="jobs">
+        { this.state.redirect && <Redirect to={this.state.redirect} /> }
+        <header>
+          <h1>Jobs</h1>
+          <button className="button-add jobs-button-add" onClick={this.toggleForm}>
+            <span className="icon"></span>
+            New Job
+          </button>
+          {this.state.showAddForm && <JobCreateForm createJob={this.createJob} />}
+        </header>
+        <section className="jobs-list">
+          <% if ( user.jobs ) { %>
+
+          <% } else { %>
+            <p className="jobs-add-message">
+              <span className="point-up"></span>
+              Click the <span className="plus">+</span> button above to begin tracking your
+              first job!
+            </p>
+          <% } %>
+
+        </section>
+      </section>
+  </div>
+  <div class="activity-wrapper block-wrapper">
+    <Activity {...this.props} />
+  </div>
+</section>

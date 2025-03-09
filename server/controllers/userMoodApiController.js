@@ -8,7 +8,8 @@ const { UserMood, User, sequelize } = require('../models');
 
 const Op = Sequelize.Op;
 
-class UserActionController extends Controller {
+class UserMoodApiController extends Controller {
+  api = true;
   model = UserMood;
   userModel = User;
   route = '/api/user/mood';
@@ -64,4 +65,4 @@ class UserActionController extends Controller {
   }
 }
 
-module.exports = UserActionController;
+module.exports = UserMoodApiController;

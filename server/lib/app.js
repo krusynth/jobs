@@ -5,10 +5,13 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const mailer = require('express-mailer');
+// const mailer = require('express-mailer');
 // const ejs = require('ejs');
 const ejsMate = require('ejs-mate');
 const passport = require('../lib/passport');
+
+const userDataMiddleware = require('../lib/middleware/userData');
+const sassMiddleware = require('node-sass-middleware');
 
 const config = require('../config.js');
 
@@ -25,7 +28,7 @@ class App {
 		this.controllers = {};
 
     this.passport = passport;
-    this.mailer = sgMail;
+    // this.mailer = sgMail;
 
 		this.init();
 	}
@@ -40,16 +43,23 @@ class App {
 	    extended: true
 		}));
 		this.express.use(bodyParser.json());
-
     this.express.use(cookieParser());
-
     this.express.use(config.session.handler);
+    this.express.use(this.passport.initialize());
+		this.express.use(this.passport.session());
+
+    this.express.use(userDataMiddleware);
+    this.express.use(sassMiddleware({
+	    src: path.join(__dirname, '../../assets/scss/'),
+	    dest: path.join(__dirname, '../../assets/css/'),
+	    debug: true,
+	    // outputStyle: 'compressed',
+	    prefix:  '/assets/css'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+		}));
+		this.express.use('/assets', express.static(path.join(__dirname, '../../assets')));
 
     // mailer.extend(this.express, this.config.mail);
-    this.mailer.setApiKey(this.config.mail.api);
-
-    this.express.use(this.passport.initialize());
-    this.express.use(this.passport.session());
+    // this.mailer.setApiKey(this.config.mail.api);
 
 		this.initControllers();
 	}
@@ -65,11 +75,11 @@ class App {
 		    let obj = require(path.join(__dirname, '../controllers', file));
 
 		    this.controllers[obj.name] = new obj(this);
-		    if(!this.controllers[obj.name].default) {
-			    this.controllers[obj.name].handle();
+		    if(this.controllers[obj.name].default) {
+		    	defaultHandler = obj.name;
 			  }
 			  else {
-			  	defaultHandler = obj.name;
+					this.controllers[obj.name].handle();
 			  }
 		  });
 

@@ -17,11 +17,17 @@ class Controller {
   // Route to this controller.
   route = '';
 
+  // Title to use if this is a regular page.
+  title = '';
+
   // Set to true for our default "catch all" route.
   default = false;
 
   // Require authorization to view this page?
   auth = false;
+
+  // Is this an API or a webpage?
+  api = false;
 
   // Additional middleware.
   middleware = [];
@@ -44,7 +50,6 @@ class Controller {
     // Set our routes.
     this.router = this.setRoutes();
 
-    // Initialize the app.
     this.init();
   }
 
@@ -52,6 +57,9 @@ class Controller {
   setRoutes() {
     const router = express.Router();
     router.get('/', this.read.bind(this));
+    if(!this.api) {
+      router.get('/create/', this.createForm.bind(this));
+    }
     router.post('/', this.create.bind(this));
     router.put('/', this.updateMany.bind(this));
     router.get('/:id', this.readById.bind(this));
@@ -61,7 +69,10 @@ class Controller {
     return router;
   }
 
-  init() {}
+  init() {
+    let name = this.constructor.name;
+    this.templateBase = name.replace('Controller', '').toLowerCase() + '/';
+  }
 
   handle() {
     if(this.auth) {
@@ -85,13 +96,27 @@ class Controller {
     this.model.findAndCountAll(query)
     .then(result => this._read(result))
     .then(result => {
-      res.setHeader('totalrecords', result.count);
-      res.send(result.rows);
+      if(this.api) {
+        res.setHeader('totalrecords', result.count);
+        res.send(result.rows);
+      }
+      else {
+        res.render(this.templateBase + 'home', {rows: result.rows, count: result.count});
+      }
     })
-    .catch( (error) => {
-      console.log('error', error);
-      res.status(400).send(this.parseErrors(error));
+    .catch(error => {
+      if(this.api) {
+        console.log('error', error);
+        res.status(400).send(this.parseErrors(error));
+      }
+      else {
+        res.render(this.templateBase + 'home', {errors: [error]});
+      }
     });
+  }
+
+  createForm(req, res, next) {
+    res.render(this.templateBase + 'create-form', {});
   }
 
   readById(req, res, next) {
@@ -109,11 +134,21 @@ class Controller {
     this.model.findOne(query)
     .then(this._readById)
     .then( data => {
-      res.send(data);
+      if(this.api) {
+        res.send(data);
+      }
+      else {
+        res.render(this.templateBase + 'detail', {data: data});
+      }
     })
-    .catch( (error) => {
-      console.log('error', error);
-      res.status(400).send(this.parseErrors(error));
+    .catch(error => {
+      if(this.api) {
+        console.log('error', error);
+        res.status(400).send(this.parseErrors(error));
+      }
+      else {
+        res.render(this.templateBase + 'home', {data: data, errors: [error]});
+      }
     });
   }
 
@@ -121,7 +156,7 @@ class Controller {
     this.beforeCreate(req,res)
     .then((args) => this.doCreate(args))
     .then((args) => this.afterCreate(args))
-    .catch( (error) => {
+    .catch(error => {
       console.log('error', error);
       res.status(400).send(this.parseErrors(error));
     });
@@ -142,6 +177,7 @@ class Controller {
 
   afterCreate(args) {
     let [data, req, res] = args;
+    res.status(201);
     this.readById(req, res);
     return Promise.resolve([req, res]);
   }
@@ -176,7 +212,12 @@ class Controller {
   }
 
   afterUpdate(data) {
-    return this.readById(this.req, this.res);
+    if(this.api) {
+      return this.readById(this.req, this.res);
+    }
+    else {
+      this.res.redirect(this.route);
+    }
   }
 
   updateMany(req, res, next) {

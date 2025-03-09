@@ -1,3 +1,52 @@
+/* Blocks */
+
+%collapsible-list {
+  display: flex;
+  flex-direction: column;
+  gap: $gutter-height;
+
+  @media(min-width: $xl-width) {
+    flex-direction: row;
+    gap: $gutter-width;
+  }
+}
+
+.columns {
+  @extend %collapsible-list;
+
+  @media(min-width: $xl-width) {
+    .column {
+      width: 50%;
+    }
+  }
+}
+
+%shadow-block {
+  box-shadow: 10px 5px rgba(0, 0, 0, 0.4);
+}
+
+%shadow-button {
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.4);
+}
+
+.row {
+  display: block;
+  width: 100%;
+}
+
+.container {
+  display: block;
+  width: 100%;
+  margin-left: $gutter-width;
+  margin-right: $gutter-width;
+
+  @media(min-width: $xl-width) {
+    width: $xl-width - 64px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
 /* Animations */
 
 .bounce {
@@ -42,13 +91,28 @@
 }
 
 /* Buttons */
+.button {
 
-.shadow {
-  box-shadow: 0 3px 3px rgba(0,0,0,0.36);
+  @extend %standard-border;
+
+  /* Floating effect */
+  position:relative;
+  top: 0;
+  transition: all .1s ease-in-out;
+
+  @extend %shadow-button;
+  &:hover {
+    top: 5px;
+    box-shadow: none;
+  }
+}
+
+.button-small {
+  padding: 0.5rem; /* Placeholder */
 }
 
 .button-round {
-  @extend .btn;
+  @extend .button;
 
   border-radius: 3rem;
   width: 2.35rem;
@@ -56,11 +120,7 @@
   padding-right: 0.65rem;
 }
 
-
-.button-round-sm {
-  @extend .btn;
-  @extend .btn-sm;
-
+.button-round.button-small {
   border-radius: 3rem;
   width: 1.95rem;
   // padding-left: 0.65rem;
@@ -68,10 +128,10 @@
 }
 
 .button-group {
-  .btn, .button {
+  .button {
     margin-right: .5em;
   }
-  .btn:last-child, .button:last-child {
+  .button:last-child {
     margin-right: 0;
   }
 }
@@ -80,7 +140,7 @@
 
   .message {
     font-size: 0.9rem;
-    color: $gray-700;
+    color: $gray-dark;
   }
 
   .under-construction-header .icon {
@@ -90,7 +150,7 @@
   }
 
   &.contained {
-    border: 2px solid $gray-300;
+    border: 2px solid $gray-dark;
     padding: 0 15px;
     margin: 0 -20px;
     border-radius: 4px;
@@ -173,4 +233,45 @@
       @extend .bounce;
     }
   }
+}
+
+// Modal Overlay
+
+.hidden {
+  display: none !important;
+}
+
+.modal {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0,0,0, 0.3);
+}
+
+.modal-inside {
+  margin: 1rem;
+  position: relative;
+
+  @media(min-width: $xl-width) {
+    width: $xl-width - 128px;
+    margin: 10vh auto;
+  }
+}
+
+.modal-closer {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  @extend %thin-border;
+
+  height: 1rem;
+  width: calc(1rem - 2px);
+  text-align: center;
+  line-height: 0.8rem;
+  padding-left: 2px;
 }

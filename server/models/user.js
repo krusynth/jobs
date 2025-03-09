@@ -64,6 +64,12 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
+    },
+    isAdmin: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return (this?.UserLevel?.name == 'Admin');
+      }
     }
   }, {
     sequelize,

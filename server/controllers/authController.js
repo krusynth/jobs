@@ -9,7 +9,8 @@ const { User } = require('../models');
 class AuthController {
   model = User;
 
-  route = '/api/auth';
+  // route = '/api/auth';
+  route = '';
 
   // Additional middleware.
   middleware = [];
@@ -23,8 +24,15 @@ class AuthController {
 
   setRoutes() {
     const router = express.Router();
-    router.post('/login', this.app.passport.authenticate('local'), this.login.bind(this));
-    router.post('/logout', this.logout.bind(this));
+    router.get('/login', this.login.bind(this));
+    router.post('/login',
+      this.app.passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login?fail=true',
+        failureMessage: true
+      })
+    );
+    router.get('/logout', this.logout.bind(this));
     router.post('/forgotpassword', this.sendToken.bind(this));
     router.get('/checktoken/:token', this.checkToken.bind(this));
     router.post('/resetpassword/:token', this.resetPassword.bind(this));
@@ -44,16 +52,26 @@ class AuthController {
   }
 
   login(req, res, next) {
-    res.status(200).send('1');
+    let errors = [];
+    if(req.query.fail) {
+      errors.push('The email address or password is not correct. Try again?');
+    }
+
+    res.render('auth/login', {
+      page:'Login',
+      errors: errors
+    });
+    //res.status(200).send('1');
   }
 
   logout(req, res, next) {
-    req.logout();
-    res.status(200).send('1');
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
   }
 
   sendToken(req, res, next) {
-    console.log('body', req.body);
     if(req.body.email) {
       this.model.findOne({where: {email: req.body.email}})
       .then( (user) => {

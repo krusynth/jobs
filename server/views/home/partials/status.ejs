@@ -1,0 +1,14 @@
+<section class="status">
+  <span class="status-question">How are you doing today?</span>
+  <div class="status-buttons">
+    <% Object.keys(statusOptions).forEach(status => { %>
+      <a href="#" key="<%= status %>"
+        class="status-buttons-button button-<%= status %> <% if(currentStatus == statusOptions[status]) { %>active<% } %>"
+        onClick="{(e) => {e.preventDefault(); this.updateStatus(<%= statusOptions[status] %>)}}"
+        ><span class="icon"></span></a>
+    <% }) %>
+  </div>
+  <section class="status-message">
+    <%= statusMessage %>
+  </section>
+</section>

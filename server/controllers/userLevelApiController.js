@@ -3,9 +3,10 @@
 const Controller = require('../lib/controller');
 const { UserLevel } = require('../models');
 
-class UserLevelController extends Controller {
+class UserLevelApiController extends Controller {
+	api = true;
 	model = UserLevel;
 	route = '/api/userlevel';
 }
 
-module.exports = UserLevelController;
+module.exports = UserLevelApiController;

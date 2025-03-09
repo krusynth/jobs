@@ -3,7 +3,8 @@
 const Controller = require('../lib/controller');
 const { UserAction, User } = require('../models');
 
-class UserActionController extends Controller {
+class UserActionApiController extends Controller {
+  api = true;
   model = UserAction;
   userModel = User;
   route = '/api/user/action';
@@ -43,4 +44,4 @@ class UserActionController extends Controller {
   }
 }
 
-module.exports = UserActionController;
+module.exports = UserActionApiController;

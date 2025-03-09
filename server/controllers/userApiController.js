@@ -1,11 +1,12 @@
 'use strict';
 
 const Controller = require('../lib/controller');
-const { User, Action } = require('../models');
+const { User, UserLevel, Action } = require('../models');
 const express = require('express');
 const moment = require('moment');
 
-class UserController extends Controller {
+class UserApiController extends Controller {
+  api = true;
   model = User;
   route = '/api/user';
 
@@ -38,12 +39,17 @@ class UserController extends Controller {
     return router;
   }
 
-  beforeCreate(req, res) {
+  async beforeCreate(req, res) {
     this.authField = null;
     let data = req.body;
-    // Hardcode our user level value.
-    // TODO: look this up somewhere.
-    data.userLevelId = 1;
+
+    const lvl = await UserLevel.findOne({where: {name: 'Member'}});
+
+    if(!lvl?.id) {
+      throw new Error('Unable to get user level')
+    }
+
+    data.userLevelId = lvl.id;
 
     return Promise.resolve([req, res, data]);
   }
@@ -155,4 +161,4 @@ class UserController extends Controller {
   }
 }
 
-module.exports = UserController;
+module.exports = UserApiController;

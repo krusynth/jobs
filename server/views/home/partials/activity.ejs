@@ -1,0 +1,12 @@
+<section className="activity">
+  <header>
+    <h4>Activity</h4>
+    <p>Here are some activities to try today!</p>
+  </header>
+
+  { this.props.user.meta.actions.map( elm =>
+    <ActivityCard
+      handleActivity={this.handleActivity}
+      key={elm.id}
+      {...elm} />) }
+</section>

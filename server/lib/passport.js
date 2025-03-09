@@ -3,11 +3,12 @@
 const config = require('../config.js');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
-const { User } = require('../models');
+const { User, UserLevel } = require('../models');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 
 passport.serializeUser(function(user, done) {
+  console.log('serializeUser', user, user.isAdmin);
   done(null, user);
 });
 
@@ -21,7 +22,8 @@ passport.use(new LocalStrategy(
   },
   function(email, password, done) {
     let query = {
-      where: {}
+      where: {},
+      include: UserLevel
     };
 
     if(config.db.dialect === 'postgres') {

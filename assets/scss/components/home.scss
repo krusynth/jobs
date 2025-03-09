@@ -4,7 +4,6 @@
 }
 
 .default-home {
-  @extend .col-md-8;
 }
 
 h1 {
@@ -20,22 +19,17 @@ h1 {
 }
 
 .status-wrapper {
-  @extend .col-md-12;
 }
 
 .jobs-wrapper {
-  // @extend .col-md-9;
-  flex: 0 0 calc(75% - 2rem);
-  margin: 0 1rem;
 }
 
 .activity-wrapper {
-  @extend .col-md-3;
 }
 
 .screenshot {
   max-width: 100%;
-  border: 3px solid $gray-800;
+  border: 3px solid $gray-dark;
   padding: 5px;
-  @extend.shadow;
+  @extend %shadow-button;
 }

@@ -1,130 +1,95 @@
 .field-group {
   margin-bottom: 1rem;
-
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-
   label {
-    font-weight: bold;
+    display: block;
+  }
 
-    .plain-text {
-      font-weight: normal;
+  .form-control {
+    margin-top: 1px;
+    width: calc(100% - 7px);
+    border: 2px solid $theme-border-color;
+    border-radius: 3px;
+  }
+}
+
+.form-title {
+  margin-bottom: 1rem;
+}
+
+.field-info {
+  margin: 0;
+}
+
+.errors {
+  width: 100%;
+}
+
+.textarea {
+    height: 10vh;
+}
+
+.textarea-tall {
+  height: 40vh;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  flex-direction:row;
+
+  @media(min-width: $xl-width) {
+    justify-content: space-between;
+  }
+}
+
+.save-button {
+  background-color: $theme-success-color;
+}
+.info-button {
+  background-color: $theme-info-color;
+}
+.delete-button {
+  background-color: $theme-danger-color;
+}
+
+/* Job Forms */
+
+.job-create-form {
+  .field-group {
+    margin-bottom: 0;
+    input {
+      width: 85%;
     }
   }
 }
 
-.form-error {
-  @extend .alert;
-  @extend .alert-danger;
-  margin-top: 0.5rem;
-  margin-bottom: 0;
-  font-style: italic;
-  padding: 0.5rem .75rem;
-}
+.job-form-title {
+  @extend %collapsible-list;
 
-.button {
-  @extend .btn;
-  @extend .btn-primary;
-  @extend .shadow;
-}
-
-.button-add {
-  @extend .button;
-  border-radius: 2rem;
-  font-size: 0;
-  padding-left: 0.4rem;
-  padding-right: 0.4rem;
-  vertical-align: top;
-  margin-top: 0.75rem;
-  margin-left: 0.5rem;
-
-  .icon {
-    font-size: 0.8rem;
-    @extend .fas;
-    @extend .fa-plus;
+  @media(min-width: $xl-width) {
+    .field-group {
+      flex-grow: 1;
+    }
   }
 }
 
-.button-watch {
-  @extend .btn;
-  padding: 0;
+@media(min-width: $xl-width) {
+  .job-create-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: min-content min-content 1fr min-content;
+    gap: $gutter-width;
 
-  font-size: 0;
-  margin-left: 0.25rem;
-  margin-bottom: 2px;
-  background: transparent;
+    .errors, .submit-group {
+      grid-column: 1 / span 2;
+    }
 
-  .icon {
-    font-size: 1rem;
-    @extend .far;
-    @extend .fa-star;
-  }
+    .field-group {
+      grid-row-start: 2;
+    }
 
-  &.active .icon {
-    @extend .fas;
-    color: $yellow;
-  }
-}
+    .field-group + .field-group {
 
-.button-save {
-  @extend .btn;
-  @extend .btn-primary;
-}
-
-.button-delete {
-  @extend .btn;
-  @extend .btn-danger;
-}
-
-.button-close {
-  font-size: 0;
-  @extend .fas;
-  @extend .fa-times;
-
-  &::before {
-    font-size: 1rem;
-  }
-  color: $black;
-  float: right;
-}
-
-button + button {
-  margin-left: 0.5rem;
-}
-
-select.form-control {
-  width: auto;
-}
-
-.form-box {
-  border: 5px solid $gray-800;
-  border-radius: 10px;
-  padding: 7px 15px;
-}
-
-/* Page Animations */
-.form-page-animation {
-
-  // width: 100vw;
-
-  .form-pages {
-    // @extend .row;
-  }
-
-  // .form-group {
-  //   @extend .col-md-6;
-  //   display: none;
-  // }
-
-  // .form-group.active {
-  //   display: block;
-  // }
-
-}
-
-.signup-form {
-  label {
-    font-weight: bold;
+    }
   }
 }

@@ -1,6 +1,6 @@
-var path = require('path');
+const path = require('path');
 
-var folder = 'server';
+const folder = 'server';
 
 module.exports = {
   'config':          path.resolve(folder, 'config.js'),

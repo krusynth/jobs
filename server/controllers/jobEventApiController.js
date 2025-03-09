@@ -3,7 +3,8 @@
 const Controller = require('../lib/controller');
 const { JobEvent, Job } = require('../models');
 
-class JobEventController extends Controller {
+class JobEventApiController extends Controller {
+  api = true;
 	model = JobEvent;
   jobModel = Job;
 
@@ -22,4 +23,4 @@ class JobEventController extends Controller {
   }
 }
 
-module.exports = JobEventController;
+module.exports = JobEventApiController;

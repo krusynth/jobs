@@ -2,8 +2,12 @@
 
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.addConstraint('users', ['email'],
-      {type: 'unique', name: 'users_email_unique'});
+    return queryInterface.addConstraint('users', 
+      {
+        type: 'unique', 
+        name: 'users_email_unique',
+        fields: ['email']
+      });
   },
 
   down: (queryInterface, Sequelize) => {

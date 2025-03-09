@@ -1,15 +1,19 @@
+// Colors
+
 $blue: #2196f3;
 $indigo: #3f51b5;
 $purple: #9c27b0;
 $pink: #e91e63;
 $red: #e53935;
 $orange: #fb8c00;
+$yellorange: #ffa400;
 $yellow: #ffc107;
 $green: #4caf50;
 $teal: #009688;
 $teal2: #1296c3;
 $cyan: #00bcd4;
 $white: #fff;
+$black: #080000;
 $gray: #6c757d;
 $gray-dark: #343a40;
 
@@ -23,4 +27,16 @@ $light: #e9ecef;
 $dark: $gray-dark;
 $tertiary: #4dabf5;
 
-$fa-font-path: "/fonts/fontawesome";
+// FontAwesome
+
+$fa-font-path: "/assets/fonts/fontawesome";
+
+$xl-width: 1200px;
+$large-width: 992px;
+$medium-width: 768px;
+$small-width: 576px;
+
+$gutter-width: 10px;
+$gutter-height: 0.25rem;
+
+$px-to-rem: 0.0625rem;

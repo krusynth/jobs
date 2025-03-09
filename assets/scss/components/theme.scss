@@ -1,63 +1,162 @@
-$themeColor: $teal2;
-$themeContrastColor: $white;
+$theme-color: $yellorange;
+$theme-border-color: $gray-dark;
+$theme-contrast-color: $white;
+$theme-link-color: $blue;
 
-$themeComplementColor: $teal2;
-$themeComplementContrastColor: $white;
+$theme-success-color: $green;
+$theme-info-color: $cyan;
+$theme-danger-color: $red;
+
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  src: url("https://static.billhunt.dev/assets/fonts/montserrat-500.eot"); /* IE9 Compat Modes */
+  src: local(""),
+    url("https://static.billhunt.dev/assets/fonts/montserrat/montserrat-500.woff2") format("woff2"),
+    url("https://static.billhunt.dev/assets/fonts/montserrat/montserrat-500.woff") format("woff"),
+    url("https://static.billhunt.dev/assets/fonts/montserrat/montserrat-500.ttf") format("truetype");
+}
+/* These gorgeous pixel fonts are by somepx! https://itch.io/profile/somepx */
+@font-face {
+  font-family: 'Absolute10';
+  font-style: normal;
+  font-weight: 500;
+  src: local(""),
+    url("https://static.billhunt.dev/assets/fonts/somepx/Absolute%2010.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Futile14';
+  font-style: normal;
+  font-weight: 500;
+  src: local(""),
+    url("https://static.billhunt.dev/assets/fonts/somepx/Futile%2014.ttf") format("truetype");
+}
+@font-face {
+  font-family: 'Winds7';
+  font-style: normal;
+  font-weight: 500;
+  src: local(""),
+    url("https://static.billhunt.dev/assets/fonts/somepx/Winds%207.ttf") format("truetype");
+}
+
+/* Pixel fonts need to look pristine and not smoothed. */
+$font-size-brand: 3rem;
+$font-size-nav: 2rem;
+$font-size-body: 1.5rem;
+
+* {
+  box-sizing: border-box;
+  font-smooth: never;
+  -webkit-font-smoothing : none;
+}
 
 body {
-  // background: url(/images/page/beige_grunge.jpg);
-  background: linear-gradient(145deg, $teal2 0%, $teal 100%);
+  background: $theme-color;
+  font-family: Winds7, Arial, Verdana, Helvetica, sans;
+  font-size: $font-size-body;
+
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 4px); /* There's some weirdness here, so just avoid it. */
+  margin: 0;
+  padding: 0;
+  border: 0;
 }
 
-.main-header {
-  background: linear-gradient(145deg, $teal2 0%, $teal 100%);
+input, button {
+  font-family: Winds7, Arial, Verdana, Helvetica, sans;
+  font-size: $font-size-body;
 }
 
-.footer {
-  background-color: $themeComplementColor;
+.title {
+  margin: 0;
+  font-family: Futile14, Montserrat, Arial, Verdana, Helvetica, sans;
+  font-weight: 500;
+}
+
+h1 {
+  @extend .title;
+  font-size: 2.5rem;
+}
+
+h2 {
+  @extend .title;
+  font-size: 2rem;
+}
+
+h3 {
+  @extend .title;
+  font-size: 1.5rem;
+}
+
+.page-header, .page-footer {
+  font-family: Futile14, Arial, Verdana, Helvetica, sans;
+  font-size: $font-size-nav;
+}
+
+.navbar-brand {
+  font-size: $font-size-brand;
+}
+
+.page-main {
+  flex-grow: 1;
+  @extend .container;
+}
+
+a {
+  text-decoration: none;
+}
+
+@mixin links($color) {
+  a {
+    color: $color;
+
+    &:hover, &:visited, &:active {
+      color: $color;
+    }
+  }
+}
+
+%normal-links {
+  @include links($blue);
+}
+
+%inverted-links {
+  @include links($theme-contrast-color)
+
+  a {
+    border-bottom: 2px solid rgba($theme-contrast-color, 0);
+    transition: border 0.25s;
+
+    &:hover {
+      text-decoration: none;
+      border-bottom: 2px solid rgba($theme-contrast-color, 1);
+    }
+  }
+}
+
+%standard-border {
+  border: 4px solid $theme-border-color;
+  border-radius: 4px;
+}
+
+%thin-border {
+  border: 3px solid $theme-border-color;
+  border-radius: 2px;
 }
 
 .block-wrapper {
-  background-color: $white;
-}
+  @extend %standard-border;
+  @extend %shadow-block;
+  background-color: $theme-contrast-color;
+  max-width: calc(100% - 20px);
 
-.page-public-home {
-
-  color: $white;
-
-  .main-header {
-    background: none;
-    box-shadow: none;
-  }
-
-  .footer {
-    color: $white;
-    background: none;
+  @media(min-width: $xl-width) {
+    max-width: 100%;
   }
 }
 
-.status-wrapper {
-  background-color: $white;
-  border: 5px solid $teal2;
-  border-radius: 10px;
-}
-
-.event-response {
-  background-color: $purple;
-}
-
-.event-interview {
-  background-color: $cyan;
-}
-
-.event-applied {
-  background-color: $blue;
-}
-
-.event-offer {
-  background-color: $green;
-}
-
-.event-rejected {
-  background-color: $gray-700;
+.modal-inside {
+  @extend .block-wrapper;
 }

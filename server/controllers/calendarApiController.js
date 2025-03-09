@@ -5,7 +5,8 @@ const ical = require('ical-generator');
 const Controller = require('../lib/controller');
 const { User, JobEvent, Job } = require('../models');
 
-class CalendarController extends Controller {
+class CalendarApiController extends Controller {
+  api = true;
 
   route = '/api/calendar';
 
@@ -90,4 +91,4 @@ class CalendarController extends Controller {
 
 }
 
-module.exports = CalendarController;
+module.exports = CalendarApiController;
