@@ -124,7 +124,7 @@ a {
   color: $blue;
 
   &:hover, &:visited, &:active {
-    color: $blue;
+    color: inherit;
   }
 
   &:hover {

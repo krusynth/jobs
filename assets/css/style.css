@@ -5729,7 +5729,7 @@ a {
   text-decoration: none;
   color: #2196f3; }
   a:hover, a:visited, a:active {
-    color: #2196f3; }
+    color: inherit; }
   a:hover {
     text-decoration: underline; }
 
@@ -6051,13 +6051,21 @@ h1 {
     .button-group {
       justify-content: space-between; } }
 
+.button, .button-round, .status-buttons-button {
+  padding: 2px 5px; }
+  .button:hover, .button-round:hover, .status-buttons-button:hover {
+    text-decoration: none; }
+
 .save-button {
+  color: #343a40;
   background-color: #4caf50; }
 
 .info-button {
+  color: #343a40;
   background-color: #00bcd4; }
 
 .delete-button {
+  color: #343a40;
   background-color: #e53935; }
 
 /* Job Forms */

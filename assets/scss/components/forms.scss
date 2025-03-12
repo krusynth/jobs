@@ -49,13 +49,24 @@
   }
 }
 
+.button {
+  padding: 2px 5px;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .save-button {
+  color: $theme-border-color;
   background-color: $theme-success-color;
 }
 .info-button {
+  color: $theme-border-color;
   background-color: $theme-info-color;
 }
 .delete-button {
+  color: $theme-border-color;
   background-color: $theme-danger-color;
 }
 
