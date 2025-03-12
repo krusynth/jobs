@@ -1,11 +1,21 @@
 <%- include('../partials/header.ejs', {'title': data.name + ' at ' + data.company + ' - Job Detail - '}); -%>
-<div class="jobs-wrapper block-wrapper">
+<div class="jobs-wrapper block-wrapper job-row" data-jobid="<%= data.id %>">
   <form class="job-form job-edit-form" id="job-edit-form" autocomplete="off">
     <header class="errors">
       <div id="errors" class="errors"></div>
     </header>
     <header class="job-form-title">
       <div class="field-group">
+      <label for="watching" class="checkbox-watching">
+        <input
+          type="checkbox"
+          name="watching"
+          id="watching"
+          value="1"
+          <% if(data.watching) { %>checked<% } %>
+      ><span class="icon" title="Watch this Job"></span>Watch this Job
+      </label>
+
         <label for="name">Job Title</label>
         <input
           type="text"
@@ -35,7 +45,7 @@
     </header>
 
     <header class="button-group">
-      { this.watchButton() }
+
     </header>
 
     <div class="columns">
@@ -55,7 +65,6 @@
             data-1p-ignore
             />
         </div>
-
         <div class="field-group">
           <label for="closes">Date Closes</label>
           <p class="field-info">The website address that you found this job posting.</p>
@@ -64,7 +73,7 @@
             name="closes"
             id="closes"
             class="form-control"
-            value="<%= data.closes %>"
+            value="<% if(data.closes && data.closes != 'Invalid Date') { %><%= new Date(data.closes).toISOString().slice(0, 10) %><% } %>"
             autocomplete="off"
             data-1p-ignore
             />
@@ -109,6 +118,8 @@
     </div>
 
     <input type="hidden" name="id" value="<%= data.id %>">
+
+    <%- include('./eventTimeline.ejs') %>
   </form>
 </div>
 

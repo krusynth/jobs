@@ -1,0 +1,27 @@
+<%- include('../partials/header.ejs', {'title': 'Forgot Password - '}); -%>
+
+<section class="block-wrapper">
+  <h1>Reset Password</h1>
+  <form class="forgot-password-form">
+    <div class="errors" id="errors"></div>
+    <div class="field-group">
+      <label htmlFor="email">Email Address</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        class="form-control"
+        required
+      />
+    </div>
+    <div class="forgot-password-submit-group">
+      <input
+        type="submit"
+        name="submit"
+        class="button save-button"
+        value="Reset Password">
+    </div>
+  </form>
+</section>
+
+<%- include('../partials/footer.ejs') %>

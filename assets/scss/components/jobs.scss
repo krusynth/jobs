@@ -1,0 +1,141 @@
+.jobs-list {
+  margin-top: 1rem;
+}
+
+.job-row {
+  @media(max-width: $xl-width) {
+    .job-title {
+      display: block;
+    }
+  }
+
+  .delete-button {
+    float: right;
+  }
+
+  & + & {
+    margin-top: 1rem;
+  }
+}
+
+.checkbox-watching {
+  font-size: 0;
+  display: inline;
+  float: left;
+  position: relative;
+  top: 4px;
+  margin-right: 2px;
+
+  input[type=checkbox] {
+    position: absolute;
+    left: -999rem;
+  }
+
+  input[type=checkbox] + .icon {
+    @extend .far;
+    @extend .fa-star;
+    font-size: 1rem;
+    color: $yellorange;
+  }
+
+  input[type=checkbox]:checked + .icon {
+    @extend .fas;
+  }
+}
+
+.watch-button {
+  border: none;
+  background: transparent;
+  color: $yellorange;
+  font-size: 0;
+  padding: 0;
+
+  .icon {
+    @extend .far;
+    @extend .fa-star;
+    font-size: 1rem;
+    color: $yellorange;
+  }
+
+  &.active .icon {
+    @extend .fas;
+  }
+}
+
+.event-add-button {
+  .event-add {
+    @extend .fa;
+    @extend .fa-map-marker-plus;
+  }
+
+  &:hover .event-add{
+    @extend .bounce;
+  }
+}
+
+.job-timeline {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.job-events {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 3px solid $gray-dark;
+  border-radius: 3px;
+
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.job-event {
+  padding-left: 5px;
+  padding-right: 5px;
+
+  transition: all .1s ease-in-out;
+
+  & + & {
+    border-left: 2px solid $gray-dark;
+  }
+
+  &.event-applied {
+    background-color: $blue;
+    &:hover {
+      background-color: lighten($blue, 10%);
+    }
+  }
+  &.event-interview {
+    background-color: $green;
+    &:hover {
+      background-color: lighten($green, 10%);
+    }
+  }
+  &.event-response {
+    background-color: $cyan;
+    &:hover {
+      background-color: lighten($cyan, 10%);
+    }
+  }
+  &.event-offer {
+    background-color: $yellorange;
+    &:hover {
+      background-color: lighten($yellorange, 15%);
+    }
+  }
+  &.event-rejected {
+    background-color: $gray;
+    color: $gray-dark;
+    &:hover {
+      background-color: lighten($gray, 10%);
+    }
+  }
+
+  .datetime {
+    white-space: nowrap;
+  }
+}

@@ -1,0 +1,71 @@
+<form class="event-form">
+  <input type="hidden" name="jobId">
+  <input type="hidden" name="id">
+
+  <h2 class="action-title"></h2>
+
+  <div class="row">
+    <div class="event-details">
+      <div class="field-group">
+        <label for="type">Type</label>
+        <select
+          name="type"
+          id="type"
+          required
+        >
+          <option value="Applied">Applied</option>
+          <option value="Response">Received Response</option>
+          <option value="Interview">Interview</option>
+          <option value="Offer">Received Offer</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label for="date">Date</label>
+        <input
+          type="date"
+          name="date"
+          class="form-control"
+          required
+        >
+      </div>
+
+      <div class="field-group duration-row">
+        <label for="duration">Length of Interview</label>
+        <p class="field-info">(in minutes)</p>
+        <input
+          name="duration"
+          id="duration"
+          type="number"
+          class="form-control"
+        >
+      </div>
+    </div>
+
+    <div class="event-notes">
+      <div class="field-group">
+        <label for="notes">My Notes</label>
+        <textarea
+          name="notes"
+          id="notes"
+          class="form-control textarea textarea-tall"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <input
+      type="submit"
+      value="Save"
+      class="submit button save-button"
+    >
+
+    <button
+      type="button"
+      value="Delete"
+      class="button delete-button"
+    >Delete</button>
+  </div>
+</form>

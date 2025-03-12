@@ -39,6 +39,13 @@ $theme-danger-color: $red;
   src: local(""),
     url("https://static.billhunt.dev/assets/fonts/somepx/Winds%207.ttf") format("truetype");
 }
+@font-face {
+  font-family: 'Yolk6';
+  font-style: normal;
+  font-weight: 500;
+  src: local(""),
+    url("https://static.billhunt.dev/assets/fonts/somepx/Yolk%206.ttf") format("truetype");
+}
 
 /* Pixel fonts need to look pristine and not smoothed. */
 $font-size-brand: 3rem;
@@ -90,6 +97,14 @@ h3 {
   font-size: 1.5rem;
 }
 
+p {
+  margin: 0;
+
+  & + & {
+    margin-top: 1rem;
+  }
+}
+
 .page-header, .page-footer {
   font-family: Futile14, Arial, Verdana, Helvetica, sans;
   font-size: $font-size-nav;
@@ -105,29 +120,27 @@ h3 {
 }
 
 a {
-  text-decoration: none;
-}
+  text-decoration: none;;
+  color: $blue;
 
-@mixin links($color) {
-  a {
-    color: $color;
+  &:hover, &:visited, &:active {
+    color: $blue;
+  }
 
-    &:hover, &:visited, &:active {
-      color: $color;
-    }
+  &:hover {
+    text-decoration: underline;
   }
 }
 
-%normal-links {
-  @include links($blue);
-}
-
 %inverted-links {
-  @include links($theme-contrast-color)
-
   a {
+    color: $theme-contrast-color;
     border-bottom: 2px solid rgba($theme-contrast-color, 0);
     transition: border 0.25s;
+
+    &:hover, &:visited, &:active {
+      color: $theme-contrast-color;
+    }
 
     &:hover {
       text-decoration: none;
@@ -135,6 +148,8 @@ a {
     }
   }
 }
+
+
 
 %standard-border {
   border: 4px solid $theme-border-color;
@@ -155,8 +170,16 @@ a {
   @media(min-width: $xl-width) {
     max-width: 100%;
   }
+
+  & + & {
+    margin-top: 1rem;
+  }
 }
 
 .modal-inside {
   @extend .block-wrapper;
+}
+
+.bwmd-content {
+  font-family: Yolk6, Arial, Verdana, Helvetica, sans;
 }

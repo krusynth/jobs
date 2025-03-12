@@ -1,7 +1,7 @@
 'use strict';
 
 const express = require('express');
-const ical = require('ical-generator');
+const ical = require('ical-generator').default;
 const Controller = require('../lib/controller');
 const { User, JobEvent, Job } = require('../models');
 
@@ -33,8 +33,7 @@ class CalendarApiController extends Controller {
     }
 
     this.model.findOne(query).then( user => {
-      console.log('user', user.meta);
-      res.redirect(`/api/calendar/${user.meta.calendarId}`);
+      res.redirect(301, `/api/calendar/${user.meta.calendarId}`);
     })
   }
 
@@ -81,7 +80,12 @@ class CalendarApiController extends Controller {
         });
       });
 
-      cal.serve(res);
+      res.writeHead(200, {
+          'Content-Type': 'text/calendar; charset=utf-8',
+          'Content-Disposition': 'attachment; filename="calendar.ics"'
+      });
+
+      res.end(cal.toString());
     })
     .catch( (error) => {
       console.log('error', error);

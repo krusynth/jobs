@@ -285,7 +285,7 @@ class Controller {
 
       errors[errorObj.path] = errorObj.message;
     }
-
+console.log('parseErrors', errors);
     return errors;
   }
 

@@ -3,81 +3,36 @@
 <!-- <div class="status-wrapper block-wrapper">
   <%- include('partials/status.ejs') %>
 </div> -->
+<div class="bwmd-wrapper block-wrapper">
+  <section class="bwmd">
+    <header class="bwmd-header">
+      <h2 class="bwmd-title">Be Well My Darlings</h2>
+    </header>
+    <article class="bwmd-content">
+      <% for(paragraph of bwmd.split('\n')) { %>
+        <% if(paragraph.length) { %>
+          <p><%= paragraph %></p>
+        <% } %>
+      <% } %>
+      <p> - <a href="https://www.jacsfishburne.com/">Jacs Fishburne</a></p>
+    </article>
+  </section>
+</div>
 <div class="jobs-wrapper block-wrapper">
   <section class="jobs">
-    <header>
+    <header class="content-header">
       <h1>Jobs</h1>
+      <a href="<%= calendarUrl %>" title="Don't download this file, instead copy this link and subscribe to it in your calendar app!"><span class="icon far fa-calendar"></span></a>
+    </header>
       <button class="button button-add jobs-button-add info-button" id="new-job-button">
         <span class="icon"></span>
         New Job
       </button>
-    </header>
     <section id="jobs-list" class="jobs-list"></section>
   </section>
 </div>
 <!-- <div class="activity-wrapper block-wrapper">
   <%- include('partials/activity.ejs') %>
 </div> -->
-
-<template id="template-job-form">
-  <form class="job-form job-create-form" id="job-create-form" autocomplete="off">
-    <h2>Job Form</h2>
-    <div id="errors" class="errors"></div>
-    <div class="field-group">
-      <label>Position</label>
-      <input
-        type="text"
-        name="name"
-        class="form-control"
-        maxlength=100
-        autocomplete="off"
-        data-1p-ignore
-        required />
-    </div>
-
-    <div class="field-group">
-      <label><span class="plain-text">at</span> Company</label>
-      <input
-        type="text"
-        name="company"
-        class="form-control"
-        maxlength=100
-        autocomplete="off"
-        data-1p-ignore
-        required />
-    </div>
-
-    <div class="submit-group">
-      <input
-        id="new-job-button"
-        type="submit"
-        class="submit button save-button"
-        value="Save" />
-    </div>
-  </form>
-</template>
-
-<template id="template-job-row">
-  <article class="job">
-    <header class="job-header">
-      <a href="" class="job-title"></a>
-      <button class="button-watch active"><span class="icon"></span>Watch this Job</button>
-    </header>
-    <section class="job-timeline-wrapper"><div class="job-timeline">
-      <button class="event-button event-add-button"><span class="event-add"></span></button>
-      <div class="job-events">
-
-      </div>
-    </section>
-  </article>
-</template>
-
-<template id="template-job-event">
-  <div class="job-event" role="progressbar">
-    <span class="icon"></span>
-    <span class="type"></span>
-    <time class="datetime" datetime=""></time>
-  </div>
-</template>
 
 <%- include('../partials/footer.ejs') %>

@@ -29,7 +29,7 @@
     "express-session": "^1.17.3",
     "formidable": "^3.5.1",
     "formik": "^2.4.5",
-    "ical-generator": "^6.0.0",
+    "ical-generator": "^8.1.1",
     "joi": "^17.11.0",
     "lodash": "^4.17.21",
     "node-sass-middleware": "^1.1.0",

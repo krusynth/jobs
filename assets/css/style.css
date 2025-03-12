@@ -2,7 +2,7 @@
  * Font Awesome Pro 5.5.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license (Commercial License)
  */
-.fa,
+.fa, .event-add-button .event-add,
 .fas,
 .under-construction .under-construction-header .icon,
 .save-status .saved,
@@ -10,7 +10,12 @@
 .save-status .unsaved,
 .save-status .syncing,
 .save-status .bg,
+.modal-closer .icon,
+.checkbox-watching input[type=checkbox]:checked + .icon,
+.watch-button.active .icon,
 .far,
+.checkbox-watching input[type=checkbox] + .icon,
+.watch-button .icon,
 .status-buttons .button-happy .icon,
 .status-buttons .button-neutral .icon,
 .status-buttons .button-down .icon,
@@ -94,7 +99,7 @@
 .fa-pull-right {
   float: right; }
 
-.fa.fa-pull-left,
+.fa.fa-pull-left, .event-add-button .fa-pull-left.event-add,
 .fas.fa-pull-left,
 .under-construction .under-construction-header .fa-pull-left.icon,
 .save-status .fa-pull-left.saved,
@@ -102,7 +107,12 @@
 .save-status .fa-pull-left.unsaved,
 .save-status .fa-pull-left.syncing,
 .save-status .fa-pull-left.bg,
+.modal-closer .fa-pull-left.icon,
+.checkbox-watching input[type=checkbox]:checked + .fa-pull-left.icon,
+.watch-button.active .fa-pull-left.icon,
 .far.fa-pull-left,
+.checkbox-watching input[type=checkbox] + .fa-pull-left.icon,
+.watch-button .fa-pull-left.icon,
 .status-buttons .button-happy .fa-pull-left.icon,
 .status-buttons .button-neutral .fa-pull-left.icon,
 .status-buttons .button-down .fa-pull-left.icon,
@@ -110,7 +120,7 @@
 .fab.fa-pull-left {
   margin-right: .3em; }
 
-.fa.fa-pull-right,
+.fa.fa-pull-right, .event-add-button .fa-pull-right.event-add,
 .fas.fa-pull-right,
 .under-construction .under-construction-header .fa-pull-right.icon,
 .save-status .fa-pull-right.saved,
@@ -118,7 +128,12 @@
 .save-status .fa-pull-right.unsaved,
 .save-status .fa-pull-right.syncing,
 .save-status .fa-pull-right.bg,
+.modal-closer .fa-pull-right.icon,
+.checkbox-watching input[type=checkbox]:checked + .fa-pull-right.icon,
+.watch-button.active .fa-pull-right.icon,
 .far.fa-pull-right,
+.checkbox-watching input[type=checkbox] + .fa-pull-right.icon,
+.watch-button .fa-pull-right.icon,
 .status-buttons .button-happy .fa-pull-right.icon,
 .status-buttons .button-neutral .fa-pull-right.icon,
 .status-buttons .button-down .fa-pull-right.icon,
@@ -3231,7 +3246,7 @@ readers do not read off random characters that represent icons */
 .fa-map-marker-minus:before {
   content: "\f609"; }
 
-.fa-map-marker-plus:before {
+.fa-map-marker-plus:before, .event-add-button .event-add:before {
   content: "\f60a"; }
 
 .fa-map-marker-question:before {
@@ -4518,7 +4533,7 @@ readers do not read off random characters that represent icons */
 .fa-stamp:before {
   content: "\f5bf"; }
 
-.fa-star:before {
+.fa-star:before, .checkbox-watching input[type=checkbox] + .icon:before, .watch-button .icon:before {
   content: "\f005"; }
 
 .fa-star-and-crescent:before {
@@ -4881,7 +4896,7 @@ readers do not read off random characters that represent icons */
 .fa-tilde:before {
   content: "\f69f"; }
 
-.fa-times:before {
+.fa-times:before, .modal-closer .icon:before {
   content: "\f00d"; }
 
 .fa-times-circle:before {
@@ -5593,6 +5608,8 @@ readers do not read off random characters that represent icons */
 
 
 .far,
+.checkbox-watching input[type=checkbox] + .icon,
+.watch-button .icon,
 .status-buttons .button-happy .icon,
 .status-buttons .button-neutral .icon,
 .status-buttons .button-down .icon {
@@ -5610,14 +5627,17 @@ readers do not read off random characters that represent icons */
   src: url("/assets/fonts/fontawesome/fa-solid-900.eot");
   src: url("/assets/fonts/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("/assets/fonts/fontawesome/fa-solid-900.woff2") format("woff2"), url("/assets/fonts/fontawesome/fa-solid-900.woff") format("woff"), url("/assets/fonts/fontawesome/fa-solid-900.ttf") format("truetype"), url("/assets/fonts/fontawesome/fa-solid-900.svg#fontawesome") format("svg"); }
 
-.fa,
+.fa, .event-add-button .event-add,
 .fas,
 .under-construction .under-construction-header .icon,
 .save-status .saved,
 .save-status .saving,
 .save-status .unsaved,
 .save-status .syncing,
-.save-status .bg {
+.save-status .bg,
+.modal-closer .icon,
+.checkbox-watching input[type=checkbox]:checked + .icon,
+.watch-button.active .icon {
   font-family: 'Font Awesome 5 Pro';
   font-weight: 900; }
 
@@ -5647,6 +5667,12 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: 500;
   src: local(""), url("https://static.billhunt.dev/assets/fonts/somepx/Winds%207.ttf") format("truetype"); }
+
+@font-face {
+  font-family: 'Yolk6';
+  font-style: normal;
+  font-weight: 500;
+  src: local(""), url("https://static.billhunt.dev/assets/fonts/somepx/Yolk%206.ttf") format("truetype"); }
 
 /* Pixel fonts need to look pristine and not smoothed. */
 * {
@@ -5684,6 +5710,11 @@ h2 {
 h3 {
   font-size: 1.5rem; }
 
+p {
+  margin: 0; }
+  p + p {
+    margin-top: 1rem; }
+
 .page-header, .page-footer {
   font-family: Futile14, Arial, Verdana, Helvetica, sans;
   font-size: 2rem; }
@@ -5695,16 +5726,19 @@ h3 {
   flex-grow: 1; }
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+  color: #2196f3; }
+  a:hover, a:visited, a:active {
+    color: #2196f3; }
+  a:hover {
+    text-decoration: underline; }
 
 .page-header a, .page-footer a {
-  color: #fff; }
-  .page-header a:hover, .page-footer a:hover, .page-header a:visited, .page-footer a:visited, .page-header a:active, .page-footer a:active {
-    color: #fff; }
-
-.page-header a, .page-footer a {
+  color: #fff;
   border-bottom: 2px solid rgba(255, 255, 255, 0);
   transition: border 0.25s; }
+  .page-header a:hover, .page-footer a:hover, .page-header a:visited, .page-footer a:visited, .page-header a:active, .page-footer a:active {
+    color: #fff; }
   .page-header a:hover, .page-footer a:hover {
     text-decoration: none;
     border-bottom: 2px solid white; }
@@ -5713,7 +5747,7 @@ a {
   border: 4px solid #343a40;
   border-radius: 4px; }
 
-.modal-closer {
+.button-small, .modal-closer .icon {
   border: 3px solid #343a40;
   border-radius: 2px; }
 
@@ -5723,6 +5757,11 @@ a {
   @media (min-width: 1200px) {
     .block-wrapper, .modal-inside {
       max-width: 100%; } }
+  .block-wrapper + .block-wrapper, .modal-inside + .block-wrapper, .block-wrapper + .modal-inside, .modal-inside + .modal-inside {
+    margin-top: 1rem; }
+
+.bwmd-content {
+  font-family: Yolk6, Arial, Verdana, Helvetica, sans; }
 
 /* Blocks */
 .columns, .page-header .navbar, .navbar-nav, .job-form-title {
@@ -5760,7 +5799,7 @@ a {
       margin-right: auto; } }
 
 /* Animations */
-.bounce, .save-status .saving:before, .save-status .syncing:before {
+.bounce, .save-status .saving:before, .save-status .syncing:before, .event-add-button:hover .event-add {
   display: inline-block;
   position: relative;
   top: 0;
@@ -5830,8 +5869,8 @@ a {
     box-shadow: none; }
 
 .button-small {
-  padding: 0.5rem;
-  /* Placeholder */ }
+  font-size: 1rem;
+  padding: 1px 4px; }
 
 .button-round, .status-buttons-button {
   border-radius: 3rem;
@@ -5911,11 +5950,11 @@ a {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  height: 1rem;
-  width: calc(1rem - 2px);
   text-align: center;
-  line-height: 0.8rem;
-  padding-left: 2px; }
+  color: #343a40; }
+  .modal-closer .icon {
+    padding: 2px 4px 1px;
+    font-size: 0.75rem; }
 
 .main {
   margin-bottom: 2rem;
@@ -5961,6 +6000,12 @@ h1 {
   margin: 0;
   padding: 0; }
 
+.content-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+
 .page-footer {
   margin-top: 1rem; }
 
@@ -5972,11 +6017,11 @@ h1 {
   margin-bottom: 1rem; }
   .field-group label {
     display: block; }
-  .field-group .form-control {
-    margin-top: 1px;
-    width: calc(100% - 7px);
-    border: 2px solid #343a40;
-    border-radius: 3px; }
+
+.form-control {
+  margin-top: 1px;
+  border: 2px solid #343a40;
+  border-radius: 3px; }
 
 .form-title {
   margin-bottom: 1rem; }
@@ -5988,10 +6033,15 @@ h1 {
   width: 100%; }
 
 .textarea {
+  width: 100%;
   height: 10vh; }
 
 .textarea-tall {
   height: 40vh; }
+
+.errors {
+  padding-left: 0;
+  color: #e53935; }
 
 /* Buttons */
 .button-group {
@@ -6016,6 +6066,9 @@ h1 {
   .job-create-form .field-group input {
     width: 85%; }
 
+.job-edit-form .form-control {
+  width: calc(100% - 7px); }
+
 @media (min-width: 1200px) {
   .job-form-title .field-group {
     flex-grow: 1; } }
@@ -6030,6 +6083,90 @@ h1 {
       grid-column: 1 / span 2; }
     .job-create-form .field-group {
       grid-row-start: 2; } }
+
+.jobs-list {
+  margin-top: 1rem; }
+
+@media (max-width: 1200px) {
+  .job-row .job-title {
+    display: block; } }
+
+.job-row .delete-button {
+  float: right; }
+
+.job-row + .job-row {
+  margin-top: 1rem; }
+
+.checkbox-watching {
+  font-size: 0;
+  display: inline;
+  float: left;
+  position: relative;
+  top: 4px;
+  margin-right: 2px; }
+  .checkbox-watching input[type=checkbox] {
+    position: absolute;
+    left: -999rem; }
+  .checkbox-watching input[type=checkbox] + .icon {
+    font-size: 1rem;
+    color: #ffa400; }
+
+.watch-button {
+  border: none;
+  background: transparent;
+  color: #ffa400;
+  font-size: 0;
+  padding: 0; }
+  .watch-button .icon {
+    font-size: 1rem;
+    color: #ffa400; }
+
+.job-timeline {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px; }
+
+.job-events {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 3px solid #343a40;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  white-space: nowrap; }
+
+.job-event {
+  padding-left: 5px;
+  padding-right: 5px;
+  transition: all .1s ease-in-out; }
+  .job-event + .job-event {
+    border-left: 2px solid #343a40; }
+  .job-event.event-applied {
+    background-color: #2196f3; }
+    .job-event.event-applied:hover {
+      background-color: #51adf6; }
+  .job-event.event-interview {
+    background-color: #4caf50; }
+    .job-event.event-interview:hover {
+      background-color: #6ec071; }
+  .job-event.event-response {
+    background-color: #00bcd4; }
+    .job-event.event-response:hover {
+      background-color: #08e3ff; }
+  .job-event.event-offer {
+    background-color: #ffa400; }
+    .job-event.event-offer:hover {
+      background-color: #ffbf4d; }
+  .job-event.event-rejected {
+    background-color: #6c757d;
+    color: #343a40; }
+    .job-event.event-rejected:hover {
+      background-color: #868e96; }
+  .job-event .datetime {
+    white-space: nowrap; }
 
 .status-wrapper {
   padding: 11px 15px 7px;

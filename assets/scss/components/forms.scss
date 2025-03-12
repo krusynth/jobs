@@ -4,12 +4,13 @@
     display: block;
   }
 
-  .form-control {
-    margin-top: 1px;
-    width: calc(100% - 7px);
-    border: 2px solid $theme-border-color;
-    border-radius: 3px;
-  }
+
+}
+
+.form-control {
+  margin-top: 1px;
+  border: 2px solid $theme-border-color;
+  border-radius: 3px;
 }
 
 .form-title {
@@ -25,11 +26,17 @@
 }
 
 .textarea {
-    height: 10vh;
+  width: 100%;
+  height: 10vh;
 }
 
 .textarea-tall {
   height: 40vh;
+}
+
+.errors {
+  padding-left: 0;
+  color: $red;
 }
 
 /* Buttons */
@@ -60,6 +67,12 @@
     input {
       width: 85%;
     }
+  }
+}
+
+.job-edit-form {
+  .form-control {
+    width: calc(100% - 7px);
   }
 }
 

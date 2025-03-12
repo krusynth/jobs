@@ -53,7 +53,10 @@
   <main class="page-main">
     <section id="modal" class="modal hidden">
       <div class="modal-inside">
-        <a class="modal-closer" id="modal-closer" title="Close Window">x</a>
+        <a class="modal-closer" id="modal-closer" title="Close Window"><span class="icon"></span></a>
         <div class="modal-content" id="modal-content"></div>
       </div>
     </section>
+    <% if(message) { %>
+      <section class="message block-wrapper"><%= message %></section>
+    <% } %>

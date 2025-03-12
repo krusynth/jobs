@@ -6,7 +6,7 @@ const renderEjs = require('../lib/renderEjs');
 const Controller = require('../lib/controller');
 const { User } = require('../models');
 
-class AuthController {
+class AuthController extends Controller {
   model = User;
 
   // route = '/api/auth';
@@ -14,13 +14,6 @@ class AuthController {
 
   // Additional middleware.
   middleware = [];
-
-  constructor(app) {
-    this.app = app;
-
-    // Set our routes.
-    this.router = this.setRoutes();
-  }
 
   setRoutes() {
     const router = express.Router();
@@ -33,22 +26,11 @@ class AuthController {
       })
     );
     router.get('/logout', this.logout.bind(this));
+    router.get('/forgotPassword', this.forgotPassword.bind(this));
     router.post('/forgotpassword', this.sendToken.bind(this));
     router.get('/checktoken/:token', this.checkToken.bind(this));
     router.post('/resetpassword/:token', this.resetPassword.bind(this));
     return router;
-  }
-
-  handle() {
-    let middleware = this.middleware.push(this.router);
-
-    let handlers = [].concat(
-      this.app.preMiddleware,
-      middleware,
-      this.app.postMiddleware
-    );
-
-    this.app.express.use(this.route, this.router);
   }
 
   login(req, res, next) {
@@ -71,43 +53,49 @@ class AuthController {
     });
   }
 
+  forgotPassword(req, res, next) {
+    res.render('forgotpassword/home');
+  }
+
   sendToken(req, res, next) {
+    console.log('here');
     if(req.body.email) {
       this.model.findOne({where: {email: req.body.email}})
       .then( (user) => {
         if(!user) {
-          return Promise.reject("Couldn't find user.");
+          res.status(400).send({'email': 'Couldn\'t find that account.'});
         }
+        else {
+          let token = this.model.generateToken();
+          user.token = token;
 
-        let token = this.model.generateToken();
-        user.token = token;
+          let replaceData = {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            link: req.protocol + '://' + req.headers.host + '/resetpassword/' + token
+          }
 
-        let replaceData = {
-          firstName: user.firstName,
-          lastName: user.lastName,
-          link: req.protocol + '://' + req.headers.host + '/resetpassword/' + token
-        }
-
-        let promise = Promise.all([
-          user.save(),
-          renderEjs('server/views/mail/forgotpassword.html.ejs', replaceData),
-          renderEjs('server/views/mail/forgotpassword.txt.ejs', replaceData)
-        ]);
-        return promise.then( ([data, htmlMessage, textMessage]) => {
-          return this.app.mailer.send({
-            to: req.body.email,
-            from: 'noreply@job.hunt.works',
-            subject: 'Job.Hunt.Works Password Reset',
-            html: htmlMessage,
-            text: textMessage
+          let promise = Promise.all([
+            user.save(),
+            renderEjs('server/views/mail/forgotpassword.html.ejs', replaceData),
+            renderEjs('server/views/mail/forgotpassword.txt.ejs', replaceData)
+          ]);
+          return promise.then( ([data, htmlMessage, textMessage]) => {
+            return this.app.mailer.send({
+              to: req.body.email,
+              from: 'noreply@job.hunt.works',
+              subject: 'Job.Hunt.Works Password Reset',
+              html: htmlMessage,
+              text: textMessage
+            });
+          })
+          .then( () => {
+            res.status(200).send({});
           });
-        })
-        .then( () => {
-          res.status(200).send({});
-        });
+        }
       }).catch( (error) => {
         console.log('Couldn\'t send email', error);
-        res.status(400).send({'email': error});
+        res.status(400).send({'email': 'Couldn\'t send email. Please try again later.'});
       });
     }
     else {

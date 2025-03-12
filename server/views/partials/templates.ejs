@@ -1,0 +1,58 @@
+<template id="template-job-form">
+  <form class="job-form job-create-form" id="job-create-form" autocomplete="off">
+    <h2>Job Form</h2>
+    <div id="errors" class="errors"></div>
+    <div class="field-group">
+      <label>Position</label>
+      <input
+        type="text"
+        name="name"
+        class="form-control"
+        maxlength=100
+        autocomplete="off"
+        data-1p-ignore
+        required />
+    </div>
+
+    <div class="field-group">
+      <label><span class="plain-text">at</span> Company</label>
+      <input
+        type="text"
+        name="company"
+        class="form-control"
+        maxlength=100
+        autocomplete="off"
+        data-1p-ignore
+        required />
+    </div>
+
+    <div class="submit-group">
+      <input
+        id="new-job-button"
+        type="submit"
+        class="submit button save-button"
+        value="Save" />
+    </div>
+  </form>
+</template>
+
+<template id="template-job-row">
+  <article class="job-row">
+    <header class="job-header">
+      <button class="watch-button"><span class="icon" title="Watch this Job"></span>Watch this Job</button>
+      <a href="" class="job-title"></a>
+      <span class="job-closes"></span>
+
+      <button class="button delete-button"><span class="icon"></span>Delete</button>
+    </header>
+    <%- include('../job/eventTimeline.ejs') %>
+  </article>
+</template>
+
+<template id="template-job-event">
+  <%- include('../job/jobEvent.ejs') %>
+</template>
+
+<template id="template-job-event-form">
+  <%- include('../job/jobEventForm.ejs') %>
+</template>

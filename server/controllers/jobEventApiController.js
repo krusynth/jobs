@@ -17,6 +17,8 @@ class JobEventApiController extends Controller {
   beforeCreate(req, res) {
     let data = req.body;
 
+    console.log('job event data', data);
+
     // TODO: check if this user owns this job.
 
     return Promise.resolve([req, res, data]);

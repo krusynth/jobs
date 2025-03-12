@@ -1,4 +1,4 @@
-<% layout('layout') -%>
+<%- include('../partials/header.ejs', {'title': 'About - '}); -%>
 
 <section class="block-wrapper">
   <h1>About Job.Hunt.Works</h1>
@@ -32,4 +32,13 @@
     <Link to="/signup/" className="btn btn-lg btn-primary">Sign Up</Link>
     <Link to="/login/"  className="btn btn-lg btn-success">Login</Link>
   </p>
+  <hr>
+  <p>
+    Website by <a href="https://billhunt.dev">Bill Hunt</a><br>
+    Be Well My Darlings by <a href="https://www.jacsfishburne.com">Jacs Fishburne</a> and used with permission<br>
+    Fonts by <a href="https://somepx.itch.io">somepx</a>
+  </p>
+
 </section>
+
+<%- include('../partials/footer.ejs') %>

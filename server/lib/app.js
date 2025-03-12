@@ -23,12 +23,12 @@ class App {
     this.config = config;
 
 		this.express = express();
-		this.preMiddleware = [];
+		this.preMiddleware = [this.viewMiddleware];
 		this.postMiddleware = [];
 		this.controllers = {};
 
     this.passport = passport;
-    // this.mailer = sgMail;
+    this.mailer = sgMail;
 
 		this.init();
 	}
@@ -86,6 +86,12 @@ class App {
 		  if(defaultHandler) {
 		  	this.controllers[defaultHandler].handle();
 		  }
+	}
+
+	viewMiddleware(req, res, next) {
+		res.locals.message = req.query.message ? req.query.message : '';
+
+		next();
 	}
 
   authMiddleware(req, res, next) {

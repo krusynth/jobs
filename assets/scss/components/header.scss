@@ -41,5 +41,11 @@ $header-text-color: $theme-contrast-color;
   padding: 0;
 }
 
+.content-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 

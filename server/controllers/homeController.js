@@ -3,6 +3,8 @@
 const express = require('express');
 const Controller = require('../lib/controller');
 
+const { User, Bwmd } = require('../models');
+
 class HomeController extends Controller {
   route = '/';
   default = true;
@@ -30,18 +32,36 @@ class HomeController extends Controller {
         'I believe in you!'
       ];
 
-      let pageData = {
-        page: 'Home',
-        currentStatus: null,
-        statusOptions: {
-          'happy': 1,
-          'neutral': 0,
-          'down': -1
-        },
-        statusMessage: ''
-      }
-      res.render('home/user-home', pageData);
+      // Figure out how many days since our launch date
+      // Use this to figure out the offset in the bwmd posts.
 
+      let userPromise = User.findOne({where: {id: req.session.passport.user.id}});
+
+      let days = Math.round((new Date() - new Date('2025-03-09')) / (1000 * 60 * 60 * 24));
+      let bwmdPromise =  Bwmd.findOne({order: [['date', 'ASC']], offset: days});
+
+      Promise.all([userPromise, bwmdPromise]).then(results => {
+        const [user, bwmd] = results;
+
+        let host = req.get('host');
+
+        const calendarUrl = 'webcal://' + host + '/api/calendar/' + user.meta.calendarId
+
+        let pageData = {
+          page: 'Home',
+          calendarUrl: calendarUrl,
+          currentStatus: null,
+          statusOptions: {
+            'happy': 1,
+            'neutral': 0,
+            'down': -1
+          },
+          bwmd: bwmd.content,
+          statusMessage: ''
+        }
+        res.render('home/user-home', pageData);
+
+      });
     }
     else {
       res.render('home/home', {page:'Home'});

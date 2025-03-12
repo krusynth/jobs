@@ -92,7 +92,6 @@
 
 /* Buttons */
 .button {
-
   @extend %standard-border;
 
   /* Floating effect */
@@ -108,7 +107,9 @@
 }
 
 .button-small {
-  padding: 0.5rem; /* Placeholder */
+  font-size: 1rem;
+  @extend %thin-border;
+  padding: 1px 4px;
 }
 
 .button-round {
@@ -137,7 +138,6 @@
 }
 
 .under-construction {
-
   .message {
     font-size: 0.9rem;
     color: $gray-dark;
@@ -266,12 +266,16 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-
-  @extend %thin-border;
-
-  height: 1rem;
-  width: calc(1rem - 2px);
   text-align: center;
-  line-height: 0.8rem;
-  padding-left: 2px;
+  color: $theme-border-color;
+
+  .icon {
+    @extend %thin-border;
+
+    padding: 2px 4px 1px;
+    font-size: 0.75rem;
+
+    @extend .fas;
+    @extend .fa-times;
+  }
 }

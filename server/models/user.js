@@ -93,9 +93,11 @@ module.exports = (sequelize, DataTypes) => {
 
   User.setPassword = function(user) {
     // We don't have access to all fields by default.
-    var rawUser = user.get({raw: true});
-    user.set('salt', crypto.randomBytes(32).toString('hex'));
-    user.set('password', User.hashPassword(rawUser.password, rawUser.salt));
+    let rawUser = user.get({raw: true});
+    const salt = crypto.randomBytes(32).toString('hex');
+
+    user.set('salt', salt);
+    user.set('password', User.hashPassword(rawUser.password, salt));
     return user;
   };
 
