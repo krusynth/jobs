@@ -1667,7 +1667,7 @@ module.exports = {
           updatedAt: new Date()
         },
         {
-          date: "2017-31-05.txt",
+          date: "2017-05-31",
           content: `Good morning, sweetheart. You're not alone in your struggles. Millions of people are struggling along right beside you and every single one of them wants you to make it. It might not be easy, but I know things will fall into place for you. You're the best person I know, it's a given. I love you and I'll be right here by your side all day, promise.`,
           createdAt: new Date(),
           updatedAt: new Date()
