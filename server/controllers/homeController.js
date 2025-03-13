@@ -37,7 +37,7 @@ class HomeController extends Controller {
 
       let userPromise = User.findOne({where: {id: req.session.passport.user.id}});
 
-      let days = Math.round((new Date() - new Date('2025-03-09')) / (1000 * 60 * 60 * 24));
+      let days = Math.round((new Date() - new Date('2025-03-13')) / (1000 * 60 * 60 * 24));
       let bwmdPromise =  Bwmd.findOne({order: [['date', 'ASC']], offset: days});
 
       Promise.all([userPromise, bwmdPromise]).then(results => {
@@ -45,7 +45,7 @@ class HomeController extends Controller {
 
         let host = req.get('host');
 
-        const calendarUrl = 'webcal://' + host + '/api/calendar/' + user.meta.calendarId
+        const calendarUrl = 'webcal://job.hunt.works/api/calendar/' + user.meta.calendarId
 
         let pageData = {
           page: 'Home',
