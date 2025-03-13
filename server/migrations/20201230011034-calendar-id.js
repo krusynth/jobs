@@ -11,7 +11,8 @@ module.exports = {
       if(users.length) {
         return Promise.all(
           users.map(user => {
-            user.set({'meta.calendarId': User.generateToken()});
+            user.meta.calendarId = User.generateToken();
+            user.changed("meta", true);
 
             return user.save()
               .catch(error => console.log(error));
