@@ -45,7 +45,7 @@ class HomeController extends Controller {
 
         let host = req.get('host');
 
-        const calendarUrl = 'webcal://job.hunt.works/api/calendar/' + user.meta.calendarId
+        const calendarUrl = 'https://job.hunt.works/api/calendar/' + user.meta.calendarId
 
         let pageData = {
           page: 'Home',
