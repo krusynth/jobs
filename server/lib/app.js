@@ -58,8 +58,7 @@ class App {
 		}));
 		this.express.use('/assets', express.static(path.join(__dirname, '../../assets')));
 
-    // mailer.extend(this.express, this.config.mail);
-    // this.mailer.setApiKey(this.config.mail.api);
+    this.mailer.setApiKey(this.config.mail.api);
 
 		this.initControllers();
 	}

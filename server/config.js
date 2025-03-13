@@ -37,7 +37,8 @@ const config = {
     })
   },
   mail: {
-    api: process.env.MAIL_API
+    api: process.env.MAIL_API,
+    from: process.env.MAIL_FROM
     // from: process.env.MAIL_FROM,
     // host: process.env.MAIL_HOST,
     // secureConnection: process.env.MAIL_SSL !== 'false',

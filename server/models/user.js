@@ -85,7 +85,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   User.beforeUpdate((user, options) => {
-    if(user._changed.password) {
+    if(user.changed('password')) {
       user = User.setPassword(user);
     }
     return user;

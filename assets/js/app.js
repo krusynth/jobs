@@ -649,7 +649,7 @@ window.addEventListener("load", e => {
       })
       .then(result => {
         if(result.status == 201 || result.status == 200 || result.status == 301) {
-          window.location.href = '/login/?message=Acccount%20created.';
+          window.location.href = '/?message=Reset%20email%20sent.';
         }
         // Handle errors
         else {
@@ -659,6 +659,55 @@ window.addEventListener("load", e => {
         }
       });
 
+    });
+  }
+
+  let resetPasswordForm = document.querySelector('.reset-password-form');
+  if(resetPasswordForm) {
+    resetPasswordForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      // Check errors;
+      let formData = new FormData(e.target.closest('.reset-password-form'));
+
+      let errors = [];
+      if(formData.get('password') && formData.get('password').length > 0) {
+        if(formData.get('password').length < 8) {
+          errors.push('Your password is too short.');
+        }
+        else if(formData.get('password').length > 255) {
+          errors.push('Your password is too long.');
+        }
+        else if(formData.get('password') !== formData.get('confirmPassword')) {
+          errors.push('Your password and confirmation do not match.');
+        }
+      }
+
+      if(errors.length) {
+        handleErrors(resetPasswordForm, errors);
+      }
+      else {
+
+        fetch('/resetpassword/' + formData.get('token'), {
+          'method': 'post',
+          'headers': {
+            'Content-Type': 'application/json'
+          },
+          'body': JSON.stringify(formDataToObject(formData))
+        })
+        .then(result => {
+          if(result.status == 201 || result.status == 200 || result.status == 301) {
+            window.location.href = '/login/?message=Password%20changed.';
+          }
+          // Handle errors
+          else {
+            result.json().then(errors => {
+              handleErrors(resetPasswordForm, Object.values(errors));
+            });
+          }
+        });
+
+      }
     });
   }
 })

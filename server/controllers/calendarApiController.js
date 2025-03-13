@@ -72,7 +72,6 @@ class CalendarApiController extends Controller {
       let cal = ical(config);
 
       result.forEach((event) => {
-        console.log(event.Job.User);
         cal.createEvent({
           start: event.date,
           allDay: true,

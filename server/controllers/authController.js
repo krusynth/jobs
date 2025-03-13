@@ -28,7 +28,7 @@ class AuthController extends Controller {
     router.get('/logout', this.logout.bind(this));
     router.get('/forgotPassword', this.forgotPassword.bind(this));
     router.post('/forgotpassword', this.sendToken.bind(this));
-    router.get('/checktoken/:token', this.checkToken.bind(this));
+    router.get('/resetpassword/:token', this.checkToken.bind(this));
     router.post('/resetpassword/:token', this.resetPassword.bind(this));
     return router;
   }
@@ -54,11 +54,10 @@ class AuthController extends Controller {
   }
 
   forgotPassword(req, res, next) {
-    res.render('forgotpassword/home');
+    res.render('auth/forgotPassword');
   }
 
   sendToken(req, res, next) {
-    console.log('here');
     if(req.body.email) {
       this.model.findOne({where: {email: req.body.email}})
       .then( (user) => {
@@ -83,19 +82,23 @@ class AuthController extends Controller {
           return promise.then( ([data, htmlMessage, textMessage]) => {
             return this.app.mailer.send({
               to: req.body.email,
-              from: 'noreply@job.hunt.works',
+              from: this.app.config.mail.from,
               subject: 'Job.Hunt.Works Password Reset',
               html: htmlMessage,
               text: textMessage
             });
           })
-          .then( () => {
+          .then(() => {
             res.status(200).send({});
-          });
+          })
+          .catch(error => {
+            console.log(error.response.body);
+            res.status(400).send({'email': 'Couldn\'t send email. Please try again later.'});
+          })
         }
       }).catch( (error) => {
-        console.log('Couldn\'t send email', error);
-        res.status(400).send({'email': 'Couldn\'t send email. Please try again later.'});
+        console.log(error);
+        res.status(400).send({'email': 'There was a server error. Please try again later.'});
       });
     }
     else {
@@ -106,15 +109,13 @@ class AuthController extends Controller {
   checkToken(req, res, next) {
     this.model.findOne({where: {token: req.params.token}}).then( (user) => {
       if(user) {
-        res.status(200).send({});
+        res.render('auth/resetPassword.ejs', {token: req.params.token});
       }
       else {
-        console.log('Couldn\'t find user');
-        res.status(404).send({error: 'Token not found.'});
+        res.redirect('/forgotpassword/?message=Invalid%20token.%20Please%20try%20again.');
       }
     }).catch( (error) => {
-      console.log('Error finding user', error);
-      res.status(400).send(error);
+      res.redirect('/forgotpassword/?message=Invalid%20token.%20Please%20try%20again.');
     });
   }
 
