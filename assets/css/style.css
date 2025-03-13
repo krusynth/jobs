@@ -5729,7 +5729,7 @@ a {
   text-decoration: none;
   color: #2196f3; }
   a:hover, a:visited, a:active {
-    color: inherit; }
+    color: #2196f3; }
   a:hover {
     text-decoration: underline; }
 
@@ -6052,20 +6052,19 @@ h1 {
       justify-content: space-between; } }
 
 .button, .button-round, .status-buttons-button {
-  padding: 2px 5px; }
-  .button:hover, .button-round:hover, .status-buttons-button:hover {
-    text-decoration: none; }
+  padding: 2px 5px;
+  color: #343a40; }
+  .button:hover, .button-round:hover, .status-buttons-button:hover, .button:active, .button-round:active, .status-buttons-button:active, .button:visited, .button-round:visited, .status-buttons-button:visited {
+    text-decoration: none;
+    color: #343a40; }
 
 .save-button {
-  color: #343a40;
   background-color: #4caf50; }
 
 .info-button {
-  color: #343a40;
   background-color: #00bcd4; }
 
 .delete-button {
-  color: #343a40;
   background-color: #e53935; }
 
 /* Job Forms */
