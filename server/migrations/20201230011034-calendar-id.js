@@ -11,6 +11,7 @@ module.exports = {
       if(users.length) {
         return Promise.all(
           users.map(user => {
+            if(typeof user.meta == 'undefined') { user.meta = {} };
             user.meta.calendarId = User.generateToken();
             user.changed("meta", true);
 
